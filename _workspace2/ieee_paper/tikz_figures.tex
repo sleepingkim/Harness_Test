@@ -1,0 +1,568 @@
+% ============================================================
+% TikZ Figures for:
+% "Smartphone Camera-Based Multimodal Biomarker Framework
+%  for AI-Driven Prediction of PCOS and Endometriosis"
+%
+% Required packages (add to main.tex preamble):
+%   \usepackage{tikz}
+%   \usepackage{pgfplots}
+%   \pgfplotsset{compat=1.18}
+%   \usetikzlibrary{arrows.meta, shapes.geometric, positioning,
+%                   fit, backgrounds, patterns, calc, decorations.pathreplacing}
+%
+% Insert each figure into main.tex at the appropriate location.
+% figure* spans both IEEE columns; figure stays in one column.
+% ============================================================
+
+% ────────────────────────────────────────────────────────────
+% FIGURE 1  System Architecture (figure* — two-column wide)
+% Place after Section III introduction paragraph.
+% ────────────────────────────────────────────────────────────
+\begin{figure*}[t]
+\centering
+\begin{tikzpicture}[
+  >=Stealth,
+  thick,
+  font=\small,
+  % Styles
+  phonebox/.style={
+    draw=black!70, fill=gray!10, rounded corners=6pt,
+    minimum width=1.6cm, minimum height=3.2cm, align=center
+  },
+  modbox/.style={
+    draw, rounded corners=5pt,
+    minimum width=2.9cm, minimum height=1.1cm,
+    align=center, text width=2.7cm
+  },
+  modA/.style={modbox, fill=blue!12, draw=blue!60},
+  modB/.style={modbox, fill=violet!12, draw=violet!60},
+  modC/.style={modbox, fill=teal!12, draw=teal!60},
+  featbox/.style={
+    draw=orange!70, fill=orange!10, rounded corners=3pt,
+    minimum width=1.7cm, minimum height=0.75cm,
+    align=center, font=\footnotesize
+  },
+  fusbox/.style={
+    draw=green!60!black, fill=green!8, rounded corners=6pt,
+    minimum width=2.5cm, minimum height=4.0cm,
+    align=center
+  },
+  outbox/.style={
+    draw, rounded corners=4pt,
+    minimum width=2.1cm, minimum height=0.7cm,
+    align=center, font=\small
+  },
+  privbox/.style={
+    draw=red!50, fill=red!5, rounded corners=4pt,
+    minimum width=2.1cm, minimum height=0.6cm,
+    align=center, font=\footnotesize, dashed
+  },
+  arr/.style={->, thick, shorten >=2pt, shorten <=2pt},
+  labl/.style={font=\footnotesize\itshape, text=black!60}
+]
+
+% ── Smartphone
+\node[phonebox] (phone) at (0, 0) {
+  \textbf{Smart-}\\
+  \textbf{phone}\\[2pt]
+  \footnotesize Front\\camera\\+\\App
+};
+
+% ── Input labels
+\node[labl, right=0.05cm of phone, yshift=1.15cm]  (il1) {};
+\node[labl, right=0.05cm of phone, yshift=0cm]     (il2) {};
+\node[labl, right=0.05cm of phone, yshift=-1.15cm] (il3) {};
+
+% ── Module A
+\node[modA] (modA) at (4.0, 1.9) {
+  \textbf{Module A}\\rPPG-HRV\\{\footnotesize 60 s facial video}
+};
+
+% ── Module B
+\node[modB] (modB) at (4.0, 0.0) {
+  \textbf{Module B}\\PCOS-DermScore\\{\footnotesize 3 selfie photos}
+};
+
+% ── Module C
+\node[modC] (modC) at (4.0, -1.9) {
+  \textbf{Module C}\\Menstrual Cycle\\{\footnotesize App daily log}
+};
+
+% ── Feature vectors
+\node[featbox] (fA) at (7.3, 1.9) {HRV features\\32-dim};
+\node[featbox] (fB) at (7.3, 0.0) {DermScore\\16-dim};
+\node[featbox] (fC) at (7.3,-1.9) {Cycle features\\16-dim};
+
+% ── Cross-Attention Fusion block
+\node[fusbox] (fusion) at (10.3, 0.0) {
+  \textbf{Cross-Attention}\\
+  \textbf{Fusion}\\[6pt]
+  \footnotesize Projection\\(64-dim)\\[3pt]
+  \footnotesize Pairwise\\Attn $\times 3$\\[3pt]
+  \footnotesize FC(128)\\FC(64)\\Softmax
+};
+
+% ── Output nodes
+\node[outbox, fill=red!10,   draw=red!50]   (o1) at (13.5, 1.6) {PCOS};
+\node[outbox, fill=blue!10,  draw=blue!50]  (o2) at (13.5, 0.0) {Endometriosis};
+\node[outbox, fill=green!10, draw=green!60] (o3) at (13.5,-1.6) {Healthy};
+
+% ── Privacy note
+\node[privbox] (priv) at (10.3, -3.0) {%
+  \textcolor{red!70!black}{On-device only:}\\raw data never sent
+};
+
+% ── Arrows: phone → modules
+\draw[arr, blue!70]   (phone.east |- modA.west) -- (modA.west);
+\draw[arr, violet!70] (phone.east |- modB.west) -- (modB.west);
+\draw[arr, teal!70]   (phone.east |- modC.west) -- (modC.west);
+
+% ── Arrows: modules → features
+\draw[arr] (modA.east) -- (fA.west);
+\draw[arr] (modB.east) -- (fB.west);
+\draw[arr] (modC.east) -- (fC.west);
+
+% ── Arrows: features → fusion
+\draw[arr] (fA.east) -- (fusion.west |- fA.east);
+\draw[arr] (fB.east) -- (fusion.west);
+\draw[arr] (fC.east) -- (fusion.west |- fC.east);
+
+% ── Arrows: fusion → outputs
+\draw[arr, red!60]   (fusion.east) -- ++(0.6,0) |- (o1.west);
+\draw[arr, blue!60]  (fusion.east) -- ++(0.6,0) |- (o2.west);
+\draw[arr, green!60!black] (fusion.east) -- ++(0.6,0) |- (o3.west);
+
+% ── Privacy dashed arrow
+\draw[->, dashed, red!50, thin] (priv.north) -- (fusion.south);
+
+% ── Probability label
+\node[labl] at (13.5, 2.5) {$P(\text{class})$};
+\draw[arr, black!40, thin] (13.5, 2.3) -- (o1.north);
+
+% ── Section labels
+\node[labl] at (0,   -2.7) {Data Collection};
+\node[labl] at (4.0, -2.7) {Feature Extraction};
+\node[labl] at (7.3, -2.7) {Embedding};
+\node[labl] at (10.3,-2.7) {Fusion};
+\node[labl] at (13.5,-2.7) {Prediction};
+
+\end{tikzpicture}
+\caption{System architecture of the proposed multimodal smartphone camera-based framework.
+Three independent modules extract complementary feature vectors from a single smartphone.
+The Cross-Attention Fusion layer learns pairwise inter-modal interactions before
+three-class softmax classification. On-device processing ensures that raw biometric
+data are never transmitted to external servers.}
+\label{fig:arch}
+\end{figure*}
+
+
+% ────────────────────────────────────────────────────────────
+% FIGURE 2  Radar Chart — Tier 1 Biomarker 5D Evaluation (figure*)
+% Place in Section IV after Table I (Tier classification).
+%
+% Axes (72° apart, starting at top = 90°):
+%   TRL=90°, CV=18°, PR=306°(= -54°), DA=234°, RF=162°
+% Scores /5, R=2.5cm
+% ────────────────────────────────────────────────────────────
+\begin{figure*}[t]
+\centering
+\begin{tikzpicture}[font=\small, >=Stealth]
+
+\def\R{2.5}   % max radius (score=5)
+
+% ── Helper macro: point at angle a, score s (out of 5)
+% coordinate = (s/5 * R * cos a,  s/5 * R * sin a)
+
+% ── Axis angles (degrees)
+\def\aTRL{90}
+\def\aCV{18}
+\def\aPR{306}  % -54
+\def\aDA{234}
+\def\aRF{162}
+
+% ── Grid pentagons at scores 1,2,3,4,5
+\foreach \s in {1,2,3,4,5}{
+  \pgfmathsetmacro\r{\s/5*\R}
+  \draw[gray!35, thin]
+    ({\r*cos(\aTRL)},{\r*sin(\aTRL)}) --
+    ({\r*cos(\aCV)}, {\r*sin(\aCV)})  --
+    ({\r*cos(\aPR)}, {\r*sin(\aPR)})  --
+    ({\r*cos(\aDA)}, {\r*sin(\aDA)})  --
+    ({\r*cos(\aRF)}, {\r*sin(\aRF)})  -- cycle;
+}
+
+% ── Axis lines
+\foreach \a in {\aTRL,\aCV,\aPR,\aDA,\aRF}{
+  \draw[gray!50] (0,0) -- ({\R*cos(\a)},{\R*sin(\a)});
+}
+
+% ── Score tick labels on TRL axis
+\foreach \s/\lab in {1/1, 2/2, 3/3, 4/4, 5/5}{
+  \pgfmathsetmacro\r{\s/5*\R}
+  \node[font=\tiny, text=gray!70, left=1pt]
+    at ({(\r)*cos(\aTRL)},{(\r)*sin(\aTRL)}) {\lab};
+}
+
+% ── Axis labels (outside R)
+\pgfmathsetmacro\Rl{\R+0.45}
+\node[align=center, font=\footnotesize\bfseries]
+  at ({\Rl*cos(\aTRL)},{\Rl*sin(\aTRL)+0.1}) {TRL};
+\node[align=center, font=\footnotesize\bfseries]
+  at ({\Rl*cos(\aCV)+0.15},{\Rl*sin(\aCV)}) {CV};
+\node[align=center, font=\footnotesize\bfseries]
+  at ({\Rl*cos(\aPR)+0.15},{\Rl*sin(\aPR)-0.1}) {PR};
+\node[align=center, font=\footnotesize\bfseries]
+  at ({\Rl*cos(\aDA)-0.15},{\Rl*sin(\aDA)-0.1}) {DA};
+\node[align=center, font=\footnotesize\bfseries]
+  at ({\Rl*cos(\aRF)-0.15},{\Rl*sin(\aRF)}) {RF};
+
+% ────────────────────────────────────────────────────
+% Biomarker polygons  (TRL, CV, PR, DA, RF)
+% B1: rPPG-HRV        (4,5,5,4,3)
+% B2: Menstrual HRV   (3,4,5,4,3)
+% B3: Acne IGA        (4,4,5,3,3)
+% B4: Hirsutism mFG   (3,4,5,3,3)
+% ────────────────────────────────────────────────────
+
+% B1 rPPG-HRV: 4,5,5,4,3
+\pgfmathsetmacro\bOaTRL{4/5*\R} \pgfmathsetmacro\bOaCV{5/5*\R}
+\pgfmathsetmacro\bOaPR{5/5*\R}  \pgfmathsetmacro\bOaDA{4/5*\R}
+\pgfmathsetmacro\bOaRF{3/5*\R}
+\filldraw[fill=blue!20, draw=blue!70, fill opacity=0.4, thick]
+  ({\bOaTRL*cos(\aTRL)},{\bOaTRL*sin(\aTRL)}) --
+  ({\bOaCV *cos(\aCV)}, {\bOaCV *sin(\aCV)})  --
+  ({\bOaPR *cos(\aPR)}, {\bOaPR *sin(\aPR)})  --
+  ({\bOaDA *cos(\aDA)}, {\bOaDA *sin(\aDA)})  --
+  ({\bOaRF *cos(\aRF)}, {\bOaRF *sin(\aRF)})  -- cycle;
+
+% B2 Menstrual HRV: 3,4,5,4,3
+\pgfmathsetmacro\bTaTRL{3/5*\R} \pgfmathsetmacro\bTaCV{4/5*\R}
+\pgfmathsetmacro\bTaPR{5/5*\R}  \pgfmathsetmacro\bTaDA{4/5*\R}
+\pgfmathsetmacro\bTaRF{3/5*\R}
+\filldraw[fill=violet!20, draw=violet!70, fill opacity=0.4, thick]
+  ({\bTaTRL*cos(\aTRL)},{\bTaTRL*sin(\aTRL)}) --
+  ({\bTaCV *cos(\aCV)}, {\bTaCV *sin(\aCV)})  --
+  ({\bTaPR *cos(\aPR)}, {\bTaPR *sin(\aPR)})  --
+  ({\bTaDA *cos(\aDA)}, {\bTaDA *sin(\aDA)})  --
+  ({\bTaRF *cos(\aRF)}, {\bTaRF *sin(\aRF)})  -- cycle;
+
+% B3 Acne IGA: 4,4,5,3,3
+\pgfmathsetmacro\bRaTRL{4/5*\R} \pgfmathsetmacro\bRaCV{4/5*\R}
+\pgfmathsetmacro\bRaPR{5/5*\R}  \pgfmathsetmacro\bRaDA{3/5*\R}
+\pgfmathsetmacro\bRaRF{3/5*\R}
+\filldraw[fill=teal!20, draw=teal!70, fill opacity=0.4, thick]
+  ({\bRaTRL*cos(\aTRL)},{\bRaTRL*sin(\aTRL)}) --
+  ({\bRaCV *cos(\aCV)}, {\bRaCV *sin(\aCV)})  --
+  ({\bRaPR *cos(\aPR)}, {\bRaPR *sin(\aPR)})  --
+  ({\bRaDA *cos(\aDA)}, {\bRaDA *sin(\aDA)})  --
+  ({\bRaRF *cos(\aRF)}, {\bRaRF *sin(\aRF)})  -- cycle;
+
+% B4 Hirsutism mFG: 3,4,5,3,3
+\pgfmathsetmacro\bFaTRL{3/5*\R} \pgfmathsetmacro\bFaCV{4/5*\R}
+\pgfmathsetmacro\bFaPR{5/5*\R}  \pgfmathsetmacro\bFaDA{3/5*\R}
+\pgfmathsetmacro\bFaRF{3/5*\R}
+\filldraw[fill=orange!20, draw=orange!70, fill opacity=0.4, thick]
+  ({\bFaTRL*cos(\aTRL)},{\bFaTRL*sin(\aTRL)}) --
+  ({\bFaCV *cos(\aCV)}, {\bFaCV *sin(\aCV)})  --
+  ({\bFaPR *cos(\aPR)}, {\bFaPR *sin(\aPR)})  --
+  ({\bFaDA *cos(\aDA)}, {\bFaDA *sin(\aDA)})  --
+  ({\bFaRF *cos(\aRF)}, {\bFaRF *sin(\aRF)})  -- cycle;
+
+% ── Legend (right of chart)
+\begin{scope}[xshift=3.6cm, yshift=1.2cm]
+  \fill[blue!30,  draw=blue!70,  opacity=0.8] (0,0)    rectangle (0.4,0.25);
+  \node[right, font=\footnotesize] at (0.5, 0.12)  {rPPG-HRV (21 pts)};
+  \fill[violet!30,draw=violet!70, opacity=0.8] (0,-0.4) rectangle (0.4,-0.15);
+  \node[right, font=\footnotesize] at (0.5,-0.28) {Menstrual HRV (19 pts)};
+  \fill[teal!30,  draw=teal!70,   opacity=0.8] (0,-0.8) rectangle (0.4,-0.55);
+  \node[right, font=\footnotesize] at (0.5,-0.68) {Acne IGA (19 pts)};
+  \fill[orange!30,draw=orange!70, opacity=0.8] (0,-1.2) rectangle (0.4,-0.95);
+  \node[right, font=\footnotesize] at (0.5,-1.08){Hirsutism mFG (18 pts)};
+\end{scope}
+
+% ── Axis descriptions below chart
+\node[font=\tiny, align=center, text=black!55, yshift=-0.3cm] at (0,-3.1) {%
+  TRL=Technical Readiness\quad CV=Clinical Validity\quad
+  PR=Practicality\quad DA=Data Availability\quad RF=Regulatory Friendliness};
+
+\end{tikzpicture}
+\caption{Five-dimensional radar chart for Tier~1 biomarker evaluation.
+Each axis represents one evaluation dimension scored 1--5.
+All four Tier~1 biomarkers score 5/5 on Practicality (PR), reflecting
+direct collectability via standard smartphone cameras without additional hardware.
+rPPG-HRV leads overall (21/25) due to its high Clinical Validity (meta-analytic
+evidence) and partial regulatory precedent (FDA-cleared FibriCheck).}
+\label{fig:radar}
+\end{figure*}
+
+
+% ────────────────────────────────────────────────────────────
+% FIGURE 3  Cross-Attention Fusion Architecture (figure — single column)
+% Place in Section III.C after the attention equation.
+% ────────────────────────────────────────────────────────────
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  >=Stealth, font=\footnotesize, thick,
+  vec/.style={draw, rounded corners=3pt,
+              minimum width=1.8cm, minimum height=0.55cm,
+              align=center},
+  proj/.style={draw, fill=gray!10, rounded corners=3pt,
+               minimum width=1.8cm, minimum height=0.55cm,
+               align=center},
+  attn/.style={draw, fill=yellow!15, rounded corners=4pt,
+               minimum width=1.8cm, minimum height=0.7cm,
+               align=center},
+  fc/.style={draw, fill=green!10, rounded corners=3pt,
+             minimum width=3.8cm, minimum height=0.55cm,
+             align=center},
+  out/.style={draw, rounded corners=3pt,
+              minimum width=1.1cm, minimum height=0.55cm,
+              align=center},
+  arr/.style={->, shorten >=1.5pt, shorten <=1.5pt}
+]
+
+%% ── Input feature vectors (left column)
+\node[vec, fill=blue!12,   draw=blue!60]   (hA) at (0, 3.6) {HRV $\mathbf{h}_A$\\32-dim};
+\node[vec, fill=violet!12, draw=violet!60] (hB) at (0, 2.2) {Derm $\mathbf{h}_B$\\16-dim};
+\node[vec, fill=teal!12,   draw=teal!60]   (hC) at (0, 0.8) {Cycle $\mathbf{h}_C$\\16-dim};
+
+%% ── Linear projection to shared space
+\node[proj] (pA) at (2.4, 3.6) {Linear\\64-dim};
+\node[proj] (pB) at (2.4, 2.2) {Linear\\64-dim};
+\node[proj] (pC) at (2.4, 0.8) {Linear\\64-dim};
+
+%% ── Cross-attention blocks (pairs: A↔B, A↔C, B↔C)
+\node[attn] (atAB) at (4.6, 4.0) {Attn\\$A{\to}B$};
+\node[attn] (atAC) at (4.6, 3.2) {Attn\\$A{\to}C$};
+\node[attn] (atBA) at (4.6, 2.5) {Attn\\$B{\to}A$};
+\node[attn] (atBC) at (4.6, 1.8) {Attn\\$B{\to}C$};
+\node[attn] (atCA) at (4.6, 1.1) {Attn\\$C{\to}A$};
+\node[attn] (atCB) at (4.6, 0.4) {Attn\\$C{\to}B$};
+
+%% ── Concat + fully connected
+\node[fc, fill=green!12] (fc1) at (2.4,-0.6) {Concat + FC(128) + ReLU};
+\node[fc, fill=green!18] (fc2) at (2.4,-1.4) {FC(64) + ReLU + Drop(0.3)};
+
+%% ── Output
+\node[out, fill=red!10,   draw=red!50]   (o1) at (0.6, -2.4) {PCOS};
+\node[out, fill=blue!10,  draw=blue!50]  (o2) at (2.4, -2.4) {Endo};
+\node[out, fill=green!10, draw=green!60] (o3) at (4.2, -2.4) {Healthy};
+
+%% ── Softmax label
+\node[draw, dashed, rounded corners=3pt,
+      minimum width=3.8cm, minimum height=0.55cm,
+      align=center, font=\footnotesize] (sm)
+  at (2.4,-1.95) {Softmax};
+
+%% ── Arrows: input → projection
+\draw[arr, blue!60]   (hA)--(pA);
+\draw[arr, violet!60] (hB)--(pB);
+\draw[arr, teal!60]   (hC)--(pC);
+
+%% ── Arrows: projections → cross-attention
+% pA as query
+\draw[arr] (pA.east) -- ++(0.2,0) |- (atAB.west);
+\draw[arr] (pA.east) -- ++(0.2,0) |- (atAC.west);
+% pB as query
+\draw[arr] (pB.east) -- ++(0.1,0) |- (atBA.west);
+\draw[arr] (pB.east) -- ++(0.1,0) |- (atBC.west);
+% pC as query
+\draw[arr] (pC.east) -- ++(0.1,0) |- (atCA.west);
+\draw[arr] (pC.east) -- ++(0.1,0) |- (atCB.west);
+
+%% ── All attention outputs → FC (via a common collect point)
+\foreach \n in {atAB,atAC,atBA,atBC,atCA,atCB}{
+  \draw[arr, gray!60] (\n.south) |- (fc1.east);
+}
+
+%% ── FC layers → softmax → output
+\draw[arr] (fc1)--(fc2);
+\draw[arr] (fc2)--(sm);
+\draw[arr] (sm.south) -- ++(0,-0.15) -| (o1.north);
+\draw[arr] (sm.south) -- ++(0,-0.15) -| (o2.north);
+\draw[arr] (sm.south) -- ++(0,-0.15) -| (o3.north);
+
+%% ── Missing modality note
+\node[draw=red!40, dashed, fill=red!4, rounded corners=3pt,
+      align=center, font=\tiny, text width=3.5cm]
+  (miss) at (2.4, -3.3)
+  {Missing modality: attention weights\\redistribute to available modalities};
+\draw[->, dashed, red!40, thin] (miss.north)--(sm.south);
+
+\end{tikzpicture}
+\caption{Cross-Attention Fusion architecture detail.
+Each modality pair computes bidirectional attention ($A{\to}B$, $B{\to}A$, etc.),
+yielding six attention outputs that are concatenated and passed through two
+fully connected layers before softmax classification.
+When a modality is unavailable, attention weights redistribute automatically,
+enabling prediction from partial inputs.}
+\label{fig:fusion}
+\end{figure}
+
+
+% ────────────────────────────────────────────────────────────
+% FIGURE 4  Three-Phase Cohort Protocol Timeline (figure* — two-column)
+% Place in Section III.D (Evaluation Design).
+% ────────────────────────────────────────────────────────────
+\begin{figure*}[t]
+\centering
+\begin{tikzpicture}[
+  >=Stealth, font=\small, thick,
+  phasebox/.style={draw, rounded corners=5pt,
+                   minimum height=1.1cm, align=center},
+  grpbox/.style={draw, rounded corners=3pt,
+                 minimum width=1.4cm, minimum height=0.65cm,
+                 align=center, font=\footnotesize},
+  milestonebox/.style={draw=black!50, dashed, rounded corners=3pt,
+                        minimum width=2.0cm, minimum height=0.5cm,
+                        align=center, font=\tiny, fill=yellow!8}
+]
+
+%% ── Timeline axis
+\def\TW{13.5}   % total width of timeline (cm)
+\def\TY{0}      % y of axis
+\def\Tstart{0}
+\def\Tend{30}   % months
+
+% Axis
+\draw[->, very thick, black!60] (-0.3, \TY) -- (\TW+0.2, \TY);
+\node[right, font=\footnotesize] at (\TW+0.2, \TY) {months};
+
+% Month ticks & labels
+\foreach \m/\lab in {0/0, 6/6, 12/12, 18/18, 24/24, 30/30}{
+  \pgfmathsetmacro\x{\m/\Tend*\TW}
+  \draw (\x, 0.12)--(\x,-0.12);
+  \node[below, font=\footnotesize] at (\x,-0.12) {\lab};
+}
+
+%% ── Phase I bar  (months 0–6)
+\pgfmathsetmacro\pIx{0}
+\pgfmathsetmacro\pIw{6/\Tend*\TW}
+\filldraw[fill=blue!20, draw=blue!70, rounded corners=4pt]
+  (\pIx, 0.25) rectangle (\pIx+\pIw, 1.55);
+\node[align=center, font=\small] at (\pIx+\pIw/2, 0.9) {
+  \textbf{Phase~I}\\Feasibility Pilot\\$n=150$
+};
+
+%% ── Phase II bar  (months 6–24)
+\pgfmathsetmacro\pIIx{6/\Tend*\TW}
+\pgfmathsetmacro\pIIw{18/\Tend*\TW}
+\filldraw[fill=violet!20, draw=violet!70, rounded corners=4pt]
+  (\pIIx, 0.25) rectangle (\pIIx+\pIIw, 1.55);
+\node[align=center, font=\small] at (\pIIx+\pIIw/2, 0.9) {
+  \textbf{Phase~II}\\Validation Cohort\\$n=600$
+};
+
+%% ── Phase III bar  (months 24–30)
+\pgfmathsetmacro\pIIIx{24/\Tend*\TW}
+\pgfmathsetmacro\pIIIw{6/\Tend*\TW}
+\filldraw[fill=teal!20, draw=teal!70, rounded corners=4pt]
+  (\pIIIx, 0.25) rectangle (\pIIIx+\pIIIw, 1.55);
+\node[align=center, font=\small] at (\pIIIx+\pIIIw/2, 0.9) {
+  \textbf{Phase~III}\\External Validation\\$n=300$
+};
+
+%% ── Group composition bars (below axis)
+%% PCOS / Endo / Healthy coloring
+
+% Phase I: 50 each
+\foreach \g/\col/\yy in {PCOS/red!25/-0.5, Endo/blue!25/-1.05, Healthy/green!25/-1.6}{
+  \filldraw[fill=\col, draw=black!40, rounded corners=2pt]
+    (0, \yy) rectangle (\pIw, \yy+0.45);
+  \node[font=\tiny, align=center] at (\pIw/2, \yy+0.22) {\g\ $n{=}50$};
+}
+
+% Phase II: 200 each
+\foreach \g/\col/\yy in {PCOS/red!25/-0.5, Endo/blue!25/-1.05, Healthy/green!25/-1.6}{
+  \filldraw[fill=\col, draw=black!40, rounded corners=2pt]
+    (\pIIx, \yy) rectangle (\pIIx+\pIIw, \yy+0.45);
+  \node[font=\tiny, align=center] at (\pIIx+\pIIw/2, \yy+0.22) {\g\ $n{=}200$};
+}
+
+% Phase III: 100 each
+\foreach \g/\col/\yy in {PCOS/red!25/-0.5, Endo/blue!25/-1.05, Healthy/green!25/-1.6}{
+  \filldraw[fill=\col, draw=black!40, rounded corners=2pt]
+    (\pIIIx, \yy) rectangle (\pIIIx+\pIIIw, \yy+0.45);
+  \node[font=\tiny, align=center] at (\pIIIx+\pIIIw/2, \yy+0.22) {\g\ $n{=}100$};
+}
+
+% Group labels (left margin)
+\node[left, font=\footnotesize\bfseries, text=red!70]    at (-0.1,-0.28) {PCOS};
+\node[left, font=\footnotesize\bfseries, text=blue!70]   at (-0.1,-0.83) {Endo};
+\node[left, font=\footnotesize\bfseries, text=green!60!black] at (-0.1,-1.38) {Healthy};
+
+%% ── Milestones
+\pgfmathsetmacro\mIend{6/\Tend*\TW}
+\pgfmathsetmacro\mIIend{24/\Tend*\TW}
+\pgfmathsetmacro\mIIIend{30/\Tend*\TW}
+
+\node[milestonebox] (ms1) at (\mIend,   2.3) {rPPG–ECG\\validation};
+\node[milestonebox] (ms2) at (\mIIend,  2.3) {Model training\\5-fold CV};
+\node[milestonebox] (ms3) at (\mIIIend, 2.3) {External\\generalizability};
+
+\draw[->, dashed, black!40] (ms1.south)--(\mIend, 1.6);
+\draw[->, dashed, black!40] (ms2.south)--(\mIIend, 1.6);
+\draw[->, dashed, black!40] (ms3.south)--(\mIIIend, 1.6);
+
+%% ── Total n annotations
+\node[font=\small\bfseries, text=black!70] at (\pIw/2,    -2.15) {Total $n=150$};
+\node[font=\small\bfseries, text=black!70] at (\pIIx+\pIIw/2, -2.15) {Total $n=600$};
+\node[font=\small\bfseries, text=black!70] at (\pIIIx+\pIIIw/2,-2.15){Total $n=300$};
+
+%% ── Duration braces
+\draw[decorate, decoration={brace,amplitude=5pt}, black!50]
+  (0, -2.45) -- (\pIw, -2.45)
+  node[midway, below=5pt, font=\footnotesize] {6 mo.};
+\draw[decorate, decoration={brace,amplitude=5pt}, black!50]
+  (\pIIx, -2.45) -- (\pIIx+\pIIw, -2.45)
+  node[midway, below=5pt, font=\footnotesize] {12--18 mo.};
+\draw[decorate, decoration={brace,amplitude=5pt}, black!50]
+  (\pIIIx, -2.45) -- (\pIIIx+\pIIIw, -2.45)
+  node[midway, below=5pt, font=\footnotesize] {6 mo.};
+
+\end{tikzpicture}
+\caption{Three-phase prospective cohort protocol.
+Phase~I ($n=150$, 6 months) validates rPPG-HRV against ECG reference and estimates
+effect sizes. Phase~II ($n=600$, 12--18 months) is powered at $\alpha=0.05$,
+$1-\beta=0.80$ for the meta-analytic HRV effect size ($d=0.57$) with 20\% dropout
+allowance, and trains the multimodal classification model.
+Phase~III ($n=300$, 6 months) provides external generalizability testing
+across independent sites, devices, and ethnicities.}
+\label{fig:cohort}
+\end{figure*}
+
+
+% ============================================================
+% HOW TO INCLUDE THESE FIGURES IN main.tex
+% ============================================================
+%
+% 1. Add to the preamble of main.tex:
+%
+%   \usepackage{tikz}
+%   \usepackage{pgfplots}
+%   \pgfplotsset{compat=1.18}
+%   \usetikzlibrary{arrows.meta, shapes.geometric, positioning,
+%                   fit, backgrounds, calc,
+%                   decorations.pathreplacing}
+%
+% 2. Include this file just before \begin{document} or inline:
+%
+%   \input{tikz_figures}
+%
+%   Or copy each figure block directly into main.tex.
+%
+% 3. Suggested placement:
+%   Fig.1 (fig:arch)   → after Section III.A "System Architecture"
+%   Fig.2 (fig:radar)  → after Table I in Section IV.A
+%   Fig.3 (fig:fusion) → after Equation (1) in Section III.C
+%   Fig.4 (fig:cohort) → in Section III.D "Evaluation Design"
+%
+% 4. Reference in text:
+%   Fig.~\ref{fig:arch}   Fig.~\ref{fig:radar}
+%   Fig.~\ref{fig:fusion} Fig.~\ref{fig:cohort}
+%
+% 5. Compile:
+%   pdflatex main.tex && bibtex main && pdflatex main.tex && pdflatex main.tex
+%
+% ============================================================

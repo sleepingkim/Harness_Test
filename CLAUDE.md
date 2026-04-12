@@ -42,8 +42,69 @@ AI 연구원의 공동연구 프로젝트. 자궁내막증(Endometriosis)과 다
         └── SKILL.md
 ```
 
+---
+
+## 하네스: 스마트폰 카메라 바이오마커 연구 + IEEE 논문
+
+**목표:** 스마트폰 카메라 기반 일상 디지털 바이오마커 수집 → AI 질병 예측 연구 탐색 → IEEE LaTeX 논문 작성
+
+**에이전트 팀:**
+
+| 에이전트 | 역할 |
+|---------|------|
+| camera-biomarker-reviewer | 스마트폰 카메라 기반 바이오마커 문헌 탐색 (rPPG, 얼굴 분석, 안구 추적 등) |
+| camera-biomarker-synthesizer | 탐색 결과 합성·분류·평가, .md + .docx 저장 |
+| ieee-paper-writer | IEEE 표준 LaTeX 형식 논문 작성 (main.tex + references.bib) |
+
+**스킬:**
+
+| 스킬 | 용도 |
+|------|------|
+| camera-biomarker-paper | 전체 파이프라인 오케스트레이터 (문헌 탐색 → 검증 → 합성 → 논문) |
+| reference-hallucination-guard | 참고문헌 실존 여부 검증, 할루시네이션 탐지 (범용 스킬, 어느 연구에도 적용 가능) |
+
+**실행 규칙:**
+- 스마트폰 카메라 바이오마커 연구, IEEE 논문 작성 요청 시 `camera-biomarker-paper` 스킬 사용
+- 참고문헌 검증 요청 시 `reference-hallucination-guard` 스킬 단독 사용 가능
+- 모든 에이전트는 `model: "opus"` 사용
+- 중간 산출물: `_workspace/camera/` 디렉토리
+
+**파이프라인:**
+```
+Phase 1: camera-biomarker-reviewer → 01_camera_literature_review.md
+Phase 1.5: reference-hallucination-guard → reference_validation_report.md
+Phase 2: camera-biomarker-synthesizer → 02_camera_synthesis.md + .docx
+Phase 3: ieee-paper-writer → ieee_paper/main.tex + references.bib
+```
+
+**디렉토리 구조:**
+```
+.claude/
+├── agents/
+│   ├── camera-biomarker-reviewer.md
+│   ├── camera-biomarker-synthesizer.md
+│   └── ieee-paper-writer.md
+└── skills/
+    ├── camera-biomarker-paper/SKILL.md
+    └── reference-hallucination-guard/SKILL.md
+
+_workspace/camera/
+├── 01_camera_literature_review.md
+├── reference_validation_report.md
+├── 02_camera_synthesis.md
+├── 스마트폰_카메라_바이오마커_합성보고서.docx
+└── ieee_paper/
+    ├── main.tex
+    ├── references.bib
+    └── README.md
+```
+
+---
+
 **변경 이력:**
 
 | 날짜 | 변경 내용 | 대상 | 사유 |
 |------|----------|------|------|
 | 2026-04-06 | 초기 구성 | 전체 | 공동연구 데이터 제안서 작성 목적으로 하네스 신규 구축 |
+| 2026-04-11 | 카메라 바이오마커 하네스 추가 | 에이전트 3개 + 스킬 2개 | 스마트폰 카메라 기반 질병 예측 연구 → IEEE 논문 작성 파이프라인 구축 |
+| 2026-04-12 | PCOS·자궁내막증 특화 하네스 추가 | 에이전트 3개 + 스킬 1개 | Skill1/2/3 스킬 통합 활용, _workspace2/ 기반 질환 특화 IEEE 논문 파이프라인 |

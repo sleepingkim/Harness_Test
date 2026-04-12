@@ -1,0 +1,206 @@
+{
+  "main": {
+    "id": "45468c3768546a18",
+    "type": "split",
+    "children": [
+      {
+        "id": "66b20db73681d61b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1186b7aa0e17bd44",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "_workspace2/01_literature_review.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "01_literature_review"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "8220db40ab43b445",
+    "type": "split",
+    "children": [
+      {
+        "id": "679a79eae0249721",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e287dcce4b4231b6",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "파일 탐색기"
+            }
+          },
+          {
+            "id": "0d51f49cd5bee0ff",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "검색"
+            }
+          },
+          {
+            "id": "e118fe2512c3de04",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "북마크"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "450e8cdc6cd12880",
+    "type": "split",
+    "children": [
+      {
+        "id": "4c56128e81822271",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d6a5037d4563070d",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "_workspace2/01_literature_review.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "01_literature_review 의 백링크"
+            }
+          },
+          {
+            "id": "00e2b8e0d040bfbc",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "_workspace2/01_literature_review.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "01_literature_review 의 나가는 링크"
+            }
+          },
+          {
+            "id": "6fd2a13b6f7539df",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "태그"
+            }
+          },
+          {
+            "id": "3f5bfbb32d767bfb",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "모든 속성"
+            }
+          },
+          {
+            "id": "f91f8c2bd4722c0c",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "_workspace2/01_literature_review.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "01_literature_review 의 개요"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:빠른 전환기 열기": false,
+      "graph:그래프 뷰 열기": false,
+      "canvas:새 캔버스 만들기": false,
+      "daily-notes:오늘의 일일 노트 열기": false,
+      "templates:템플릿 삽입": false,
+      "command-palette:명령어 팔레트 열기": false,
+      "bases:새 베이스 생성하기": false
+    }
+  },
+  "active": "1186b7aa0e17bd44",
+  "lastOpenFiles": [
+    "_workspace2/ieee_paper/~$실용인공지능학술지_v1.2_largefont.docx",
+    "_workspace2/ieee_paper/한국실용인공지능학술지_v1.2_largefont.docx",
+    "_workspace2/ieee_paper/~$실용인공지능학술지_v1.1_figures.docx",
+    "_workspace2/ieee_paper/한국실용인공지능학술지_v1.1_figures.docx",
+    "_workspace2/ieee_paper/~$실용인공지능학술지_v1.0.docx",
+    "_workspace2/ieee_paper/한국실용인공지능학술지_v1.0.docx",
+    "한국실용인공지능학술지_템플릿_최종본.docx",
+    "_workspace2/02_research_design.md",
+    "_workspace2/03_biomarker_synthesis.md",
+    "_workspace2/PROCESS.md",
+    "_workspace2/ieee_paper/main_v1.1_tikz-figures.tex",
+    "_workspace2/ieee_paper/tikz_figures.tex",
+    "_workspace/PROCESS.md",
+    "_workspace/camera/01_camera_literature_review.md",
+    "_workspace/camera/reference_validation_report.md",
+    "_workspace/01_literature_review.md",
+    "_workspace/camera/02_camera_synthesis.md"
+  ]
+}
