@@ -1,0 +1,46 @@
+# AmoUni-SoccerTrack default configuration
+# Reference: 05_research_design.md §5 (CV1~CV8)
+
+experiment:
+  name: amoni_taad_v0
+  seed: 42
+  output_dir: runs/
+
+model:
+  use_amodal: true
+  use_uncertainty: true
+  amodal_channels: 192
+  pose_channels: 17
+  num_classes: 9  # 8 actions + background (matches FOOTPASS TAAD output)
+
+# FOOTPASS dataset settings (pass-through to upstream TAAD_Dataset)
+data:
+  # FOOTPASS-main is the sibling of FOOTPASS-ext
+  data_root: ../FOOTPASS-main
+  clip_length: 50
+  max_nb_samples_per_class: 1000
+  nb_tracklets: 4
+  label_dilation: 1
+  norm_mean: 0.45
+  norm_std: 0.225
+
+train:
+  batch_size: 2  # constrained by GPU memory; raise on A100
+  num_workers: 4
+  epochs: 30
+  optimizer: adamw
+  lr: 0.0001
+  weight_decay: 0.0001
+  scheduler: cosine
+  warmup_epochs: 2
+  grad_clip: 1.0
+  # Loss weights
+  lambda_action: 1.0
+  lambda_amodal: 0.3       # applied only if amodal GT is available
+  lambda_consistency: 0.5
+  lambda_uncertainty: 0.3
+
+eval:
+  split: val
+  nms_tolerance: 12  # frames, per FOOTPASS spec
+  confidence_threshold: 0.15

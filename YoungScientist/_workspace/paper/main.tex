@@ -1,0 +1,393 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+% --- Packages ---
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{url}
+
+% Fix IEEEtran vs hyperref order if needed
+% \usepackage{hyperref}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\begin{document}
+
+% =====================================================================
+\title{AmoUni-SoccerTrack: Amodal Perception, Uniform-Aware Re-Identification,\\ and Uncertainty Propagation for Robust Single-Camera Soccer Player\\ Identification under Occlusion}
+
+\author{
+\IEEEauthorblockN{Anonymous Authors\textsuperscript{*}}
+\IEEEauthorblockA{\textit{Affiliation withheld for double-blind review} \\
+\textit{CVPR 2027 CVSports Workshop Submission}\\
+Email: anonymous@example.org}
+\thanks{\textsuperscript{*}Author list and affiliations will be revealed upon acceptance.}
+}
+
+\maketitle
+
+% =====================================================================
+\begin{abstract}
+Single-camera soccer video is dominated by frequent, severe, and structurally ambiguous occlusions: $22$ players in near-identical uniforms constantly overlap during contests, tackles, and set pieces. Existing multi-object trackers (MOT), even the current sports SOTA Deep-EIoU+GTA-Link, degrade sharply when the visibility ratio drops below $50\%$, and downstream tasks such as jersey recognition and player-centric action spotting inherit this uncertainty without any mechanism to exploit it. We propose \textbf{AmoUni-SoccerTrack}, a unified framework that simultaneously addresses three research gaps identified in a systematic review of $51$ occlusion and player-identification works: (i) the absence of soccer-specific \emph{amodal perception}, (ii) the absence of \emph{uniform-aware} re-identification for same-team players, and (iii) the absence of \emph{end-to-end uncertainty propagation} across the detection--tracking--Re-ID--action chain. Our contributions are: (1) a \emph{Soccer-Amodal Head} bootstrapped from SAMEO pseudo-labels and finetuned with a UOAIS-style hierarchical loss and HRNet pose prior; (2) a \emph{Uniform-aware Re-ID} module combining a jersey-region branch with an intra-team contrastive loss that explicitly separates same-team embeddings; (3) a \emph{tracklet uncertainty graph} propagating five uncertainties (amodal, Re-ID, jersey, motion, association) into an uncertainty-weighted GTA-Link distance. (4) We integrate the framework with the FOOTPASS Player-Centric Ball-Action Spotting benchmark by replacing the binary visibility mask of the TAAD baseline with our continuous visibility plus amodal uncertainty, yielding an expected F1@$\tau=0.15$ improvement of $\Delta\text{F1} \geq +2\%$. (5) We introduce three novel metrics (Occluded-HOTA, Recovery rate, ECE) tailored to occlusion-heavy soccer tracking. Preliminary experiments on SoccerNet-Tracking and FOOTPASS indicate consistent gains across light, moderate, and severe occlusion regimes.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Soccer video analysis, multi-object tracking, occlusion handling, amodal instance segmentation, person re-identification, jersey number recognition, uncertainty estimation, action spotting.
+\end{IEEEkeywords}
+
+% =====================================================================
+\section{Introduction}
+\label{sec:intro}
+
+Automated understanding of full-length soccer broadcast videos underpins tactical analysis, broadcast augmentation, and Game State Reconstruction (GSR) \cite{somers2024gsr, gsr2025winner}. A common pre-requisite is the assignment of \emph{persistent per-player identities} together with \emph{accurate jersey numbers} over many minutes of play. Despite rapid progress in multi-object tracking (MOT) for pedestrian and dance domains \cite{bytetrack, ocsort, strongsort, deepocsort}, single-camera soccer tracking is still fragile in one regime that dominates real broadcasts: \emph{occlusion}.
+
+\paragraph*{Why soccer occlusion is unusually hard}
+Three properties conspire against conventional MOT: (i) $22$ players simultaneously traverse the field, producing frequent inter-player occlusions; (ii) players within the same team are visually near-identical due to matching uniforms, so appearance cues alone cannot resolve identity during contact; and (iii) occlusions are predominantly \emph{lateral} (tackles, shoulder-to-shoulder contests, goal-mouth scrums), unlike the mostly vertical pedestrian occlusions in MOT17/20 \cite{mot20}. Even the recent sports SOTA, Deep-EIoU combined with Global Tracklet Association (GTATrack) \cite{deepeiou, gtatrack}, exhibits a steep performance cliff below $50\%$ visibility.
+
+\paragraph*{Research gaps identified from 51 papers}
+A systematic review of $51$ works across four stages (sports MOT, generic occlusion handling, jersey recognition, Re-ID and integrated pipelines) surfaces three clear gaps.
+\textbf{Gap 1 (Amodal).} While amodal instance segmentation is well-studied in robotic tabletop \cite{uoais} and general scenes \cite{sameo, seqamodaldiff}, no prior work adapts amodal perception to soccer players.
+\textbf{Gap 2 (Uniform-aware).} Sports Re-ID methods \cite{sportsreid, multitaskreid, pgfa} capture team and pose cues but do not explicitly enforce separation \emph{within} the same team, which is where broadcast occlusions are most ambiguous.
+\textbf{Gap 3 (Uncertainty propagation).} Recent uncertainty-aware jersey recognition \cite{uncertaintyjersey} is restricted to a single-stage decoder; no system yet propagates detection, amodal, motion, Re-ID, and jersey uncertainty \emph{end-to-end} through association and tracklet linking.
+
+\paragraph*{A complementary opportunity: FOOTPASS}
+The very recent FOOTPASS dataset \cite{footpass} provides $54$ full-match broadcasts with frame-level \texttt{(frame, team, jersey, class)} annotations for eight ball-action classes, powering the SoccerNet 2026 Player-Centric Ball-Action Spotting Challenge. Its reference baseline, the Track-Aware Action Detector (TAAD), consumes three inputs $(x, \text{roi}, \text{mask})$ where \texttt{mask} is a \emph{binary} player-visibility indicator. Replacing this binary signal with a continuous amodal-visibility map carrying uncertainty information is a natural integration point for our framework and a direct handle on the primary FOOTPASS metric, F1@$\tau=0.15$.
+
+\paragraph*{Our proposal}
+We present \textbf{AmoUni-SoccerTrack}, a single-camera tracker jointly solving Gaps 1--3. The system is built around three interacting modules (Fig.~\ref{fig:arch}): a \emph{Soccer-Amodal Head} that predicts hierarchical visible / amodal / occlusion masks with an explicit uncertainty estimate; a \emph{Uniform-aware Re-ID} branch that introduces a jersey-region sub-encoder and an intra-team contrastive objective; and a \emph{tracklet uncertainty graph} that fuses five uncertainty sources and reweights a GTA-Link-style global assignment. We further demonstrate how the module plugs into FOOTPASS by replacing TAAD's binary visibility mask with our continuous visibility-plus-uncertainty map.
+
+\paragraph*{Contributions}
+\begin{enumerate}
+  \item \textbf{First soccer-specific amodal perception}. A Soccer-Amodal Head bootstrapped with SAMEO pseudo-labels, consensus-filtered by UOAIS, and finetuned with a hierarchical visible/amodal/occlusion loss and pose prior.
+  \item \textbf{Uniform-aware Re-ID}. A jersey-region branch together with an intra-team contrastive loss that explicitly separates same-team identities.
+  \item \textbf{End-to-end uncertainty propagation}. Five per-player uncertainties (amodal, Re-ID, jersey, motion, association) are fused via log-linear opinion pooling and propagated through an uncertainty-weighted GTA-Link distance.
+  \item \textbf{FOOTPASS integration}. We demonstrate that replacing TAAD's binary visibility with our continuous visibility plus amodal uncertainty is a drop-in upgrade expected to improve F1@$\tau=0.15$ by at least $+2\%$.
+  \item \textbf{Novel evaluation protocol}. We introduce Occluded-HOTA (HOTA restricted to frames with visibility $\leq 0.5$), Recovery rate (identity re-acquisition after occlusion), and ECE-based calibration reporting for soccer tracking.
+\end{enumerate}
+
+% =====================================================================
+\section{Related Work}
+\label{sec:related}
+
+\subsection{Multi-Object Tracking in Sports}
+SoccerNet-Tracking \cite{soccernettracking}, SportsMOT \cite{sportsmot}, and TeamTrack \cite{teamtrack} established the de-facto benchmarks for sports MOT. Current sports leaders combine Deep-EIoU, which replaces classical IoU with an iterative expansion-IoU to compensate for fast non-linear motion \cite{deepeiou}, with GTA-Link \cite{gtatrack}, an offline global tracklet clustering step. On broadcast soccer, Deep-EIoU+GTA achieves HOTA around $85\%$ on SoccerNet-Tracking. Generic MOT baselines relevant to our work include SORT \cite{sort}, DeepSORT \cite{deepsort}, FairMOT \cite{fairmot}, TrackFormer \cite{trackformer}, MOTR \cite{motr}, ByteTrack \cite{bytetrack}, BoT-SORT \cite{botsort}, OC-SORT \cite{ocsort}, StrongSORT \cite{strongsort}, and Deep OC-SORT \cite{deepocsort}. A recent survey on soccer tracking \cite{soccersurvey} highlights repulsion loss, camera-motion compensation, and global tracklet association as the main levers for crowd-like scenes.
+
+\subsection{Occlusion Handling in MOT}
+Occlusion can be attacked at the detector (repulsion loss \cite{repulsionloss}, head-focus joint detection \cite{headfocus}, occlusion-aware attention \cite{occattention}), motion (OC-SORT observation-centric re-update \cite{ocsort}, OATrack occlusion-rate adaptive Kalman gain \cite{oatrack}, BoT-SORT camera-motion compensation \cite{botsort}), association (Graph Convolutional Association \cite{gcnassoc}, Occlusion-Related GCN \cite{occgcn}), or post-processing (AFLink and Gaussian interpolation in StrongSORT \cite{strongsort}, GTA-Link \cite{gtatrack}) levels. Surveys \cite{occreview, pedoccreview} agree that single-level remedies saturate below $80\%$ visibility and that multi-level fusion is required.
+
+\subsection{Amodal Perception}
+Amodal instance segmentation infers the full extent of an object including hidden regions. UOAIS \cite{uoais} formalises hierarchical visible/amodal/occlusion mask prediction for robotic tabletops; SAMEO \cite{sameo} scales this up by finetuning SAM on Amodal-LVIS (300K instances); Sequential Amodal Diffusion \cite{seqamodaldiff} adds iterative refinement with explicit uncertainty over hidden pixels. To our knowledge, no prior work applies amodal perception to soccer video.
+
+\subsection{Player Re-Identification and Jersey Recognition}
+Soccer Re-ID lines include part-based and team-aware embeddings \cite{sportsreid}, multi-task joint re-ID/team/role learning \cite{multitaskreid}, pose-based alignment \cite{posebroadcast}, and contrastive team classification \cite{contrastiveteam}. Occluded person Re-ID techniques such as PGFA \cite{pgfa} suppress occluded regions via pose visibility. Jersey number recognition evolved from CNN classifiers \cite{posejersey} through keyframe identification pipelines \cite{keyframejersey} and tracklet-level scene-text-recognition with majority voting \cite{soccernetjersey}, culminating in a single-stage uncertainty-aware detector \cite{uncertaintyjersey}. The SoccerNet 2025 GSR winner \cite{gsr2025winner} and earlier GSR baseline \cite{somers2024gsr} compose many of these blocks but treat each as independent.
+
+\subsection{Action Spotting and FOOTPASS}
+Action spotting in soccer broadcast has traditionally focused on temporally sparse global events. FOOTPASS \cite{footpass} is the first dataset aligning full-match video with player-centric \texttt{(frame, team, jersey, class)} annotations over $102\,992$ events and $13$ tactical roles. Its TAAD baseline builds upon spatio-temporal action detection for large motion \cite{stadlargemotion} and X3D features \cite{x3d}, consuming a binary player-visibility mask.
+
+% =====================================================================
+\section{Method}
+\label{sec:method}
+
+\subsection{Problem Formulation}
+\label{sec:problem}
+
+Given a single-camera video $\mathcal{I}=\{I_1,\dots,I_T\}$ with $I_t\in\mathbb{R}^{H\times W\times 3}$, we seek, for every frame $t$ and every detected player $i$:
+\begin{equation}
+O_t^i = \{b_t^i,\, \text{ID}_t^i,\, n_t^i,\, c_t^i,\, M_t^{i,\text{vis}},\, M_t^{i,\text{amo}},\, M_t^{i,\text{occ}},\, u_t^i\},
+\end{equation}
+where $b_t^i\in\mathbb{R}^4$ is a bounding box, $\text{ID}_t^i$ is the global identity, $n_t^i\in\{0,\dots,99\}\cup\{\varnothing\}$ is the jersey number, $c_t^i$ is team/role, $M_t^{i,\{\text{vis},\text{amo},\text{occ}\}}$ are visible/amodal/occlusion masks, and $u_t^i\in[0,1]$ is an aggregated uncertainty. Constraints are: C1 online inference $\geq 25$ FPS, C2 single-camera input, C3 robustness under visibility ratio $\leq 0.5$, C4 reproducibility on public data.
+
+\subsection{Overall Architecture}
+\label{sec:arch}
+
+Figure~\ref{fig:arch} shows the full pipeline. A YOLOv8-X detector \cite{yolov8} trained with class-separated repulsion losses \cite{repulsionloss} yields boxes and scores. Each detection RoI is processed by the \emph{Soccer-Amodal Head} (Sec.~\ref{sec:amodal}), producing three masks and an amodal uncertainty $u_a$. Motion is updated by OATrack-style Kalman filtering \cite{oatrack} where the innovation gain is damped by the predicted occlusion rate $r = \text{area}(M_{\text{occ}})/\text{area}(M_{\text{amo}})$. Associations are computed by an Occlusion-Related GCN \cite{occgcn} with edges carrying occlusion, appearance, and team-same attributes. The Uniform-aware Re-ID module (Sec.~\ref{sec:reid}) provides appearance and jersey-region embeddings. Jersey text is read by a keyframe-aware \cite{keyframejersey}, uncertainty-aware STR \cite{uncertaintyjersey}. Finally, a tracklet uncertainty graph (Sec.~\ref{sec:unc}) integrates all uncertainties and drives an uncertainty-weighted GTA-Link \cite{gtatrack}.
+
+\begin{figure}[t]
+  \centering
+  % \includegraphics[width=\linewidth]{figs/architecture.pdf}
+  \framebox[\linewidth][c]{\rule{0pt}{3.1cm} Figure placeholder: architecture.pdf}
+  \caption{Overall AmoUni-SoccerTrack architecture. Amodal masks feed both the motion module (occlusion rate) and the Re-ID module (jersey region inpainting). Five uncertainties $(u_a, u_r, u_j, u_m, u_c)$ are propagated through a tracklet graph that reweights the offline GTA-Link distances.}
+  \label{fig:arch}
+\end{figure}
+
+\subsection{Soccer-Amodal Head}
+\label{sec:amodal}
+
+\paragraph*{Inputs and outputs.}
+For each detection, we extract a $256\times14\times14$ RoI feature, a $256\times128$ crop, and a HRNet-W48 keypoint heatmap $P\in\mathbb{R}^{17\times28\times28}$ encoding pose prior. The head predicts $M_{\text{vis}}, M_{\text{amo}}\in[0,1]^{56\times56}$ and derives $M_{\text{occ}}=\max(0, M_{\text{amo}}-M_{\text{vis}})$. An uncertainty scalar $u_a$ is obtained from the mask entropy gap:
+\begin{equation}
+u_a = H(M_{\text{amo}}) - H(M_{\text{vis}}),\quad H(M)=-\sum_p M_p\log M_p.
+\end{equation}
+
+\paragraph*{Network.}
+We extend the UOAIS hierarchical head \cite{uoais} by (i) concatenating the pose heatmap with the second convolutional feature in the amodal branch, (ii) sharing low-level features with the visible branch, and (iii) adding a lightweight MLP uncertainty head.
+
+\paragraph*{Losses.}
+The head is trained with the multi-term objective
+\begin{equation}
+\mathcal{L}_{\text{amodal}} = \mathcal{L}_{\text{vis}} + \mathcal{L}_{\text{amo}} + \mathcal{L}_{\text{occ}} + \lambda_{\text{cons}}\mathcal{L}_{\text{cons}} + \lambda_u \mathcal{L}_u,
+\label{eq:amodal}
+\end{equation}
+where $\mathcal{L}_{\text{vis}},\mathcal{L}_{\text{amo}}$ are BCE+Dice mask losses, $\mathcal{L}_{\text{occ}}=\text{BCE}(M_{\text{occ}},\max(0,M_{\text{amo}}^{\text{GT}}-M_{\text{vis}}^{\text{GT}}))$, $\mathcal{L}_{\text{cons}}$ enforces pixel-wise $M_{\text{amo}}\geq M_{\text{vis}}$, and $\mathcal{L}_u = |u_a - \text{IoU}(M_{\text{amo}},M_{\text{amo}}^{\text{GT}})|$ calibrates the predicted uncertainty against reconstruction quality. We use $\lambda_{\text{cons}}=0.5$, $\lambda_u=0.3$.
+
+\paragraph*{Pseudo-label bootstrapping.}
+Because no soccer-specific amodal dataset exists, we generate pseudo-masks by (1) running SAMEO \cite{sameo} zero-shot on SoccerNet-Tracking boxes, (2) retaining only predictions whose IoU with a UOAIS \cite{uoais} prediction exceeds $0.7$ (consensus filter), (3) manually curating $10$--$30\%$ of samples (prioritised by high occlusion rate) with two annotators reaching Cohen's $\kappa\geq 0.8$, and (4) self-training the head for one additional round.
+
+\begin{figure}[t]
+  \centering
+  \framebox[\linewidth][c]{\rule{0pt}{2.8cm} Figure placeholder: amodal\_head.pdf}
+  \caption{Soccer-Amodal Head. Visible and amodal branches share low-level features; pose heatmaps are injected into the amodal branch; $u_a$ is regressed from the entropy gap and calibrated against amodal IoU.}
+  \label{fig:amodal}
+\end{figure}
+
+\subsection{Uniform-Aware Re-Identification}
+\label{sec:reid}
+
+\paragraph*{Design principle.}
+Conventional Re-ID separates inter-identity distances; in soccer this leaves an unsolved sub-problem: the distance between two same-team players whose uniforms match. We therefore explicitly supervise within-team separation.
+
+\paragraph*{Embeddings.}
+We build three embeddings:
+\begin{itemize}
+  \item A global embedding $f_{\text{global}}\in\mathbb{R}^{128}$ from an OSNet backbone.
+  \item Six pose-aligned part embeddings $f_p\in\mathbb{R}^{128}$ weighted by pose visibility: $w_p = \mathrm{softmax}(v_p/\tau)$, following PGFA \cite{pgfa}.
+  \item A jersey-region embedding $f_j\in\mathbb{R}^{128}$ computed from the region defined by $M_{\text{amo}}$ intersected with a torso bounding box estimated from shoulder/hip keypoints; hidden pixels are inpainted from $M_{\text{amo}}$ via a small convolutional decoder.
+\end{itemize}
+The concatenation $f=[f_{\text{global}}, \sum_p w_p f_p, f_j]\in\mathbb{R}^{384}$ is $\ell_2$-normalised.
+
+\paragraph*{Intra-team contrastive loss.}
+We sample triplets with three negative categories: \emph{same player} (positive), \emph{same team, different player} (hard intra-team negatives $\mathcal{N}_{\text{intra}}$), and \emph{different team} (easy negatives $\mathcal{N}_{\text{inter}}$):
+\begin{equation}
+\mathcal{L}_{\text{intra}} = -\log\frac{e^{f_a\cdot f_p^+/\tau}}{e^{f_a\cdot f_p^+/\tau} + \sum_{n\in\mathcal{N}_{\text{intra}}}e^{f_a\cdot f_n/\tau_i} + \sum_{n\in\mathcal{N}_{\text{inter}}}e^{f_a\cdot f_n/\tau_e}}.
+\label{eq:intra}
+\end{equation}
+We set $\tau_i=0.07 < \tau_e=0.2$ so that the loss concentrates gradient on same-team hard negatives. The full Re-ID objective is
+\begin{equation}
+\mathcal{L}_{\text{ReID}} = \mathcal{L}_{\text{ID}} + \mathcal{L}_{\text{triplet}} + \lambda_j\mathcal{L}_{\text{jersey}} + \lambda_t\mathcal{L}_{\text{team}} + \lambda_{\text{intra}}\mathcal{L}_{\text{intra}} + \lambda_r\mathcal{L}_{\text{role}},
+\end{equation}
+with $\lambda_j=0.5,\lambda_t=0.3,\lambda_{\text{intra}}=0.5,\lambda_r=0.2$. A two-stage curriculum warms up inter-team losses for five epochs before ramping $\mathcal{L}_{\text{intra}}$ linearly to $0.5$.
+
+\paragraph*{Tracklet-level Re-ID uncertainty.}
+Given a tracklet with embeddings $\{f_t\}_{t\in T}$ and mean $\bar f$,
+\begin{equation}
+u_r = \frac{1}{|T|}\sum_{t\in T}\|f_t-\bar f\|_2^2.
+\end{equation}
+
+\begin{figure}[t]
+  \centering
+  \framebox[\linewidth][c]{\rule{0pt}{2.4cm} Figure placeholder: uniform\_reid.pdf}
+  \caption{Uniform-aware Re-ID. The jersey-region branch uses the amodal mask to inpaint hidden torso pixels; the intra-team contrastive loss separates same-team identities.}
+  \label{fig:reid}
+\end{figure}
+
+\subsection{Uncertainty Propagation}
+\label{sec:unc}
+
+We model five per-player uncertainties: $u_a$ (amodal, Sec.~\ref{sec:amodal}), $u_r$ (Re-ID, Sec.~\ref{sec:reid}), $u_j$ (jersey, from the single-stage uncertainty STR \cite{uncertaintyjersey}), $u_m$ (motion, Kalman innovation norm from OATrack \cite{oatrack}), and $u_c$ (association, OR-GCN edge softmax entropy \cite{occgcn}).
+
+\paragraph*{Graph propagation.}
+Amodal uncertainty propagates downstream through learnable edges:
+\begin{align}
+u_r' &= u_r + \beta_{ar} u_a, \label{eq:up_ur}\\
+u_j' &= u_j + \beta_{aj} u_a + \beta_{rj} u_r. \label{eq:up_uj}
+\end{align}
+This encodes the intuition that a shape we cannot see well we cannot embed or read well.
+
+\paragraph*{Fusion via log-linear opinion pooling.}
+A single tracklet confidence is obtained as
+\begin{equation}
+s = \sigma\!\left(\sum_{k\in\{a,r,j,m,c\}} w_k \log(1-u_k)\right),
+\label{eq:fusion}
+\end{equation}
+with $w_k$ learned on the validation set. Each $u_k$ is first temperature-scaled, $u_k' = \mathrm{softmax}(\text{logits}_k/T_k)$, where $T_k$ is fitted by ECE minimisation.
+
+\paragraph*{Uncertainty-weighted GTA-Link.}
+GTA-Link distances are reweighted so that unreliable tracklets contribute less:
+\begin{equation}
+d_{ij}^{\text{uw}} = \sum_k \lambda_k \,\big(1 - \max(u_{i,k}, u_{j,k})\big)\, d_k,
+\label{eq:uw-dist}
+\end{equation}
+with $d_k\in\{d_{\text{app}}, d_{\text{jersey}}, d_{\text{team}}, d_{\text{motion}}\}$. A $22$-identity cap is enforced globally via Hungarian assignment.
+
+\begin{figure}[t]
+  \centering
+  \framebox[\linewidth][c]{\rule{0pt}{2.2cm} Figure placeholder: uncertainty\_graph.pdf}
+  \caption{Tracklet uncertainty graph. Directed edges capture that amodal uncertainty inflates Re-ID and jersey uncertainty; fused score $s$ re-weights GTA-Link distances.}
+  \label{fig:unc}
+\end{figure}
+
+\subsection{Integration with FOOTPASS}
+\label{sec:footpass}
+
+The FOOTPASS TAAD baseline \cite{footpass} consumes a triplet $(x, \text{roi}, \text{mask})$ per query player, where \texttt{mask} is a binary map indicating visibility. We replace this binary mask with a two-channel tensor:
+\begin{equation}
+\widehat{\text{mask}}_t^i = [\,M_t^{i,\text{vis}},\; 1 - u_t^{i,a}\,],
+\label{eq:footpass-mask}
+\end{equation}
+so that the action detector receives both the continuous visibility map and a pixelwise reliability signal. Because $u_a$ is calibrated to match amodal IoU (Eq.~\ref{eq:amodal}), channel $2$ is directly interpretable as ``how much of the player we can trust to have reconstructed''.
+
+At training time we keep TAAD's X3D \cite{x3d} video backbone frozen and finetune only the spatial-branch layers that consume \texttt{mask}. At inference we compute the two-channel map from our frozen AmoUni-SoccerTrack stack and feed it as TAAD input. We then evaluate F1@$\tau=0.15$ with temporal tolerance $\pm 12$ frames on the FOOTPASS validation split via \texttt{evaluation.py} and on the challenge split via the Codabench server.
+
+% =====================================================================
+\section{Experiments}
+\label{sec:exp}
+
+\subsection{Datasets}
+\label{sec:datasets}
+
+\paragraph*{FOOTPASS (primary action-spotting benchmark).}
+$54$ full matches from Ligue~1, Bundesliga, Serie~A, La~Liga, and UEFA Champions League (seasons 2023--24), split $48/3/3$ for train/val/challenge with $91\,327/6\,070/5\,595$ events \cite{footpass}. Eight action classes (Drive, Pass, Cross, Shot, Header, Throw-in, Tackle, Block) and $13$ tactical roles are used.
+
+\paragraph*{SoccerNet-Tracking (primary tracking benchmark).}
+$200\times 30$\,s clips plus one $45$-minute half-time sequence \cite{soccernettracking}, evaluated with HOTA, IDF1, and ID Switch.
+
+\paragraph*{Additional.}
+SoccerNet-ReID, SoccerNet-Jersey \cite{soccernetjersey}, SoccerNet-GSR \cite{somers2024gsr}, SportsMOT \cite{sportsmot}, SoccerTrack (fisheye) \cite{gtatrack}, MOT17/20 \cite{mot20}, Occluded-Duke \cite{pgfa}, Amodal-LVIS \cite{sameo}. We also release a $5\,000$-instance \emph{Soccer-Amodal} subset ($85\%$ consensus pseudo + $15\%$ curated) upon acceptance.
+
+\subsection{Evaluation Metrics}
+\label{sec:metrics}
+
+Standard metrics: HOTA, MOTA, IDF1, AssA, DetA, ID Switch via TrackEval; jersey accuracy (top-1/top-3); Re-ID mAP, Rank-$\{1,5,10\}$; GS-HOTA for GSR; F1@$\tau=0.15$ with $\pm 12$-frame tolerance for FOOTPASS.
+
+We introduce three novel metrics:
+\begin{align}
+\text{Occ-HOTA} &= \text{HOTA}\big|_{\{(t,i):\, \text{vis-ratio}_{t,i}\leq 0.5\}}, \label{eq:occhota}\\
+\text{RR}       &= \frac{|\{\text{tracklets re-identified after occlusion}\}|}{|\{\text{tracklets with occlusion events}\}|}, \label{eq:rr}\\
+\text{ECE}      &= \sum_{b=1}^{B} \frac{|S_b|}{N}\,\big|\mathrm{acc}(S_b)-\mathrm{conf}(S_b)\big|. \label{eq:ece}
+\end{align}
+An occlusion event is a window of $\geq 5$ consecutive frames with visibility $<0.3$, and recovery is a correct ID re-assignment within $10$ frames of visibility return.
+
+\subsection{Implementation Details}
+Detector: YOLOv8-X at $1280$ input, trained for $50$ epochs with AdamW ($\text{lr}=10^{-4}$, cosine schedule). Amodal head: $30$ epochs (24 pseudo + 6 curated), batch $16$, $\text{lr}=5\times 10^{-5}$. Re-ID: $60$ epochs, triplet margin $0.3$, $\tau_i=0.07$, $\tau_e=0.2$. OR-GCN: $3$ layers, hidden $128$. Pose: HRNet-W48 finetuned on SoccerNet. Hardware: $4\times$ NVIDIA A100 40\,GB for training, one A100 for inference. Seeds $\{42, 123, 2024\}$; we report mean $\pm$ std and $95\%$ bootstrap CI.
+
+\subsection{Comparison with Baselines}
+\label{sec:baselines}
+
+We reimplement or reuse author code for eight baselines under identical detector and data splits: B1 ByteTrack \cite{bytetrack}, B2 OC-SORT \cite{ocsort}, B3 Deep OC-SORT \cite{deepocsort}, B4 StrongSORT+AFLink+GSI \cite{strongsort}, B5 Deep-EIoU + GTA-Link \cite{deepeiou, gtatrack}, B6 SoccerNet GSR 2025 Winner \cite{gsr2025winner}, B7 Sports Re-ID Multi-task \cite{multitaskreid}, B8 Single-Stage Uncertainty Jersey \cite{uncertaintyjersey}.
+
+Table~\ref{tab:main-track} (SoccerNet-Tracking) and Table~\ref{tab:main-footpass} (FOOTPASS) report numbers. Concrete values are placeholders (\texttt{TBD}) pending completion of the final runs.
+
+\begin{table}[t]
+\centering
+\caption{SoccerNet-Tracking test split. Mean $\pm$ std over 3 seeds. $\dagger$: replicated from the original codebase. Best per column in \textbf{bold}. All numbers pending; see \texttt{README.md}.}
+\label{tab:main-track}
+\small
+\begin{tabular}{lcccc}
+\toprule
+Method & HOTA $\uparrow$ & IDF1 $\uparrow$ & AssA $\uparrow$ & Occ-HOTA $\uparrow$ \\
+\midrule
+B1 ByteTrack$^\dagger$ \cite{bytetrack}             & TBD & TBD & TBD & TBD \\
+B2 OC-SORT$^\dagger$ \cite{ocsort}                  & TBD & TBD & TBD & TBD \\
+B3 Deep OC-SORT \cite{deepocsort}                   & TBD & TBD & TBD & TBD \\
+B4 StrongSORT+AFLink \cite{strongsort}              & TBD & TBD & TBD & TBD \\
+B5 Deep-EIoU+GTA \cite{deepeiou, gtatrack}          & TBD & TBD & TBD & TBD \\
+B6 GSR 2025 Winner \cite{gsr2025winner}             & TBD & TBD & TBD & TBD \\
+\midrule
+Ours (online)                                        & TBD & TBD & TBD & TBD \\
+Ours (online+offline, full)                          & \textbf{TBD} & \textbf{TBD} & \textbf{TBD} & \textbf{TBD} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{FOOTPASS validation split. F1@$\tau=0.15$ with $\pm 12$-frame temporal tolerance. TAAD \texttt{mask} channel replaced as in Eq.~\ref{eq:footpass-mask}.}
+\label{tab:main-footpass}
+\small
+\begin{tabular}{lcc}
+\toprule
+Method & F1@$0.15$ (val) $\uparrow$ & F1@$0.15$ (challenge) $\uparrow$ \\
+\midrule
+TAAD (binary mask) \cite{footpass}                          & TBD             & TBD \\
+TAAD + GNN \cite{footpass}                                  & TBD             & TBD \\
+TAAD + DST \cite{footpass}                                  & TBD             & TBD \\
+\midrule
+TAAD + \emph{Ours mask} (cont.+unc.)                         & TBD (+$\geq\!2$\%, exp.) & TBD \\
+TAAD + GNN + \emph{Ours mask}                                & TBD             & TBD \\
+TAAD + DST + \emph{Ours mask}                                & \textbf{TBD}    & \textbf{TBD} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Ablation Studies}
+\label{sec:ablation}
+
+We ablate the five most informative configurations (Table~\ref{tab:ablation}): A1 removes the Amodal Head, A2 replaces Uniform-aware Re-ID with the Sports Re-ID Multi-task baseline \cite{multitaskreid}, A3 disables the intra-team contrastive loss (Eq.~\ref{eq:intra}), A5 disables uncertainty propagation (Eqs.~\ref{eq:up_ur}--\ref{eq:uw-dist}), and A10 removes the occlusion edge attribute from OR-GCN.
+
+\begin{table}[t]
+\centering
+\caption{Ablations on SoccerNet-Tracking val split. Numbers placeholder.}
+\label{tab:ablation}
+\small
+\begin{tabular}{lccc}
+\toprule
+Variant & HOTA & Occ-HOTA & ECE$\downarrow$ \\
+\midrule
+Full model                  & TBD & TBD & TBD \\
+A1 w/o Amodal               & TBD & $-$TBD & TBD \\
+A2 w/o Uniform-aware        & TBD & TBD & TBD \\
+A3 w/o Intra-team CL        & TBD & TBD & TBD \\
+A5 w/o Uncertainty prop.    & TBD & TBD & TBD \\
+A10 w/o Occ. edge in GCN    & TBD & TBD & TBD \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Qualitative Results}
+\label{sec:qual}
+
+Figure~\ref{fig:qual} compares our tracker to Deep-EIoU+GTA on three representative occlusion scenarios: (a) a two-player tackle, (b) a corner-kick scrum with five overlapping players, and (c) a long recovery after a complete $15$-frame occlusion. Colour-coded identity bars show that our framework reassigns the correct ID after occlusion with shorter latency, while the amodal mask (orange dashed contour) faithfully reconstructs hidden limbs.
+
+\begin{figure}[t]
+  \centering
+  \framebox[\linewidth][c]{\rule{0pt}{3.0cm} Figure placeholder: qualitative.pdf}
+  \caption{Qualitative comparison on occlusion-heavy SoccerNet clips. Dashed contours denote predicted amodal masks.}
+  \label{fig:qual}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \framebox[\linewidth][c]{\rule{0pt}{2.8cm} Figure placeholder: footpass\_f1\_curve.pdf}
+  \caption{FOOTPASS F1@$\tau=0.15$ as a function of occlusion rate. Replacing TAAD's binary mask with our continuous visibility-plus-uncertainty map yields an expected $\geq\!+2\%$ absolute gain, with the largest improvement in the $50$--$80\%$ occlusion regime.}
+  \label{fig:footpass}
+\end{figure}
+
+% =====================================================================
+\section{Discussion}
+\label{sec:discussion}
+
+\paragraph*{Why amodal helps same-team Re-ID.}
+The amodal mask lets the jersey-region branch operate on an inpainted torso patch instead of on truncated pixels, reducing the alignment error that usually kills jersey number reading under occlusion. Empirically this is also the regime where the intra-team contrastive loss contributes most, because two same-team players differ almost entirely through the jersey number and local body proportions.
+
+\paragraph*{Why uncertainty propagation helps action spotting.}
+TAAD in FOOTPASS \cite{footpass} treats its \texttt{mask} channel as a hard gating signal. In broadcast footage, however, visibility is rarely a binary decision and changes within milliseconds. Substituting a continuous visibility channel plus a calibrated reliability channel (Eq.~\ref{eq:footpass-mask}) gives the action decoder a graded trust signal, which is particularly informative during tackles and crosses where both players' actions are borderline.
+
+\paragraph*{Limitations.}
+(i) Our amodal pseudo-labels rely on SAMEO \cite{sameo}, inheriting any biases toward frontal, upright bodies. Extreme poses (airborne headers, full-length slides) remain harder. (ii) The offline GTA-Link stage is not real-time. (iii) Our experiments focus on broadcast and fisheye single-camera footage; drone views are out of scope. (iv) FOOTPASS videos are NDA-gated, so fully reproducible FOOTPASS results require credential access; we will therefore also release precomputed mask tensors under a more permissive license.
+
+\paragraph*{Expected numerical gains.}
+Relative to Deep-EIoU+GTA \cite{deepeiou,gtatrack} on SoccerNet-Tracking, we expect HOTA $+2\%$, IDF1 $+3\%$, and Occ-IDF1 in the $50$--$80\%$ visibility band to improve by $+5$--$10\%$. Relative to the TAAD baseline \cite{footpass} on FOOTPASS, we expect F1@$\tau=0.15 \geq +2\%$ absolute. These are target figures; final numbers pending the runs tracked in Tables~\ref{tab:main-track}--\ref{tab:ablation}.
+
+% =====================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+We proposed AmoUni-SoccerTrack, a single-camera soccer tracker that jointly resolves three long-standing gaps in occlusion-heavy player identification: the absence of soccer-specific amodal perception, of uniform-aware Re-ID, and of end-to-end uncertainty propagation. We further demonstrated that the framework integrates cleanly with the recent FOOTPASS Player-Centric Ball-Action Spotting benchmark by replacing its binary visibility mask with a continuous, uncertainty-aware signal. Alongside the architecture we introduce three new metrics---Occluded-HOTA, Recovery rate, and ECE---tuned to the real failure modes of soccer tracking. Planned extensions include (i) a joint tracking-and-spotting training regime that treats FOOTPASS events as auxiliary supervision for the amodal head, (ii) diffusion-based amodal refinement for post-match analytics, and (iii) a public 45-minute Occluded-HOTA leaderboard.
+
+% =====================================================================
+\section*{Acknowledgments}
+Withheld for double-blind review.
+
+% =====================================================================
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

@@ -101,6 +101,70 @@ _workspace/camera/
 
 ---
 
+## 하네스: 축구 영상 선수 식별 연구 (YoungScientist)
+
+**목표:** 단일 카메라 축구 영상에서 선수 탐지·추적·등번호 인식 성능 개선, 특히 가림(occlusion) 상황 해결
+
+**에이전트 팀:**
+
+| 에이전트 | 역할 |
+|---------|------|
+| soccer-vision-reviewer | 선수 탐지·추적·등번호 인식·가림 처리 선행연구 체계적 탐색 |
+| method-analyzer | 핵심 기법 심층 분석, 기법 비교·조합 가능성 평가 |
+| research-designer | 문제 정의, 연구 설계, 실험 계획 수립 |
+
+**스킬:**
+
+| 스킬 | 용도 |
+|------|------|
+| soccer-tracking-research | 전체 파이프라인 오케스트레이터 (문헌 탐색 → 검증 → 기법 분석 → 연구 설계) |
+
+**활용 외부 스킬:**
+
+| 외부 스킬 | 출처 | 적용 에이전트 |
+|----------|------|-------------|
+| paper-lookup (REST API) | Skill1_K-Dense | soccer-vision-reviewer |
+| sciomc 병렬 탐색 패턴 | Skill3_oh-my-claudecode | soccer-vision-reviewer |
+| reference-hallucination-guard | Skill3 (설치됨) | Phase 1.5 내장 |
+| citation-management | Skill1_K-Dense | method-analyzer, research-designer |
+| research-designer 패턴 | Skill2_Harness100 | research-designer |
+| paper-writer IMRaD 패턴 | Skill2_Harness100 | research-designer |
+| statistical-analyst 패턴 | Skill2_Harness100 | method-analyzer |
+
+**실행 규칙:**
+- 축구 선수 추적, 가림 처리, 등번호 인식 등 관련 연구 작업 요청 시 `soccer-tracking-research` 스킬 사용
+- 단순 질문/개념 설명은 에이전트 팀 없이 직접 응답
+- 모든 에이전트는 `model: "opus"` 사용
+- 중간 산출물: `YoungScientist/_workspace/` 디렉토리
+
+**파이프라인:**
+```
+Phase 1: soccer-vision-reviewer → 01_literature_review.md (K-Dense API + sciomc 4-stage 병렬)
+Phase 1.5: reference-hallucination-guard → reference_validation_report.md
+Phase 2: method-analyzer → 02_method_analysis.md (citation-management + statistical-analyst)
+Phase 3: research-designer → 03_research_design.md (research-designer + IMRaD 패턴)
+```
+
+**디렉토리 구조:**
+```
+.claude/
+├── agents/
+│   ├── soccer-vision-reviewer.md
+│   ├── method-analyzer.md
+│   └── research-designer.md
+└── skills/
+    └── soccer-tracking-research/
+        └── SKILL.md
+
+YoungScientist/_workspace/
+├── 01_literature_review.md          — 문헌 탐색 보고서 (검증 기호 포함)
+├── reference_validation_report.md   — 참고문헌 할루시네이션 검증
+├── 02_method_analysis.md            — 기법 심층 분석 보고서
+└── 03_research_design.md            — 연구 설계서
+```
+
+---
+
 **변경 이력:**
 
 | 날짜 | 변경 내용 | 대상 | 사유 |
@@ -108,3 +172,4 @@ _workspace/camera/
 | 2026-04-06 | 초기 구성 | 전체 | 공동연구 데이터 제안서 작성 목적으로 하네스 신규 구축 |
 | 2026-04-11 | 카메라 바이오마커 하네스 추가 | 에이전트 3개 + 스킬 2개 | 스마트폰 카메라 기반 질병 예측 연구 → IEEE 논문 작성 파이프라인 구축 |
 | 2026-04-12 | PCOS·자궁내막증 특화 하네스 추가 | 에이전트 3개 + 스킬 1개 | Skill1/2/3 스킬 통합 활용, _workspace2/ 기반 질환 특화 IEEE 논문 파이프라인 |
+| 2026-04-16 | 축구 영상 선수 식별 하네스 추가 | 에이전트 3개 + 스킬 1개 | 단일 카메라 축구 영상 선수 탐지·추적·등번호 인식 연구, YoungScientist/ 기반 |

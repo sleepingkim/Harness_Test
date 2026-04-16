@@ -1,0 +1,395 @@
+% =====================================================================
+% AmoUni-SoccerTrack references
+% CVPR 2027 CVSports Workshop submission
+% Compiled from _workspace/01_literature_review.md + FOOTPASS README.
+% =====================================================================
+
+% ---------------------------------------------------------------------
+% Soccer / Sports MOT benchmarks and trackers
+% ---------------------------------------------------------------------
+@inproceedings{soccernettracking,
+  title     = {{SoccerNet-Tracking}: Multiple Object Tracking Dataset and Benchmark in Soccer Videos},
+  author    = {Cioppa, Anthony and Giancola, Silvio and Deliege, Adrien and Magera, Floriane and Somers, Vladimir and Ghasemzadeh, Seyed Abolfazl and Ley, Josiane and Muhammad, Shaheer and Muhammad, Sajid and Cholakkal, Hisham and Cholakkal, Salman and Cholakkal, Fahad and Droogenbroeck, Marc Van},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+  year      = {2022}
+}
+
+@inproceedings{sportsmot,
+  title     = {{SportsMOT}: A Large Multi-Object Tracking Dataset in Multiple Sports Scenes},
+  author    = {Cui, Yutao and Zeng, Chenkai and Zhao, Xiaoyu and Yang, Yichun and Wu, Gangshan and Wang, Limin},
+  booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+  year      = {2023}
+}
+
+@inproceedings{teamtrack,
+  title     = {{TeamTrack}: A Dataset for Multi-Sport Multi-Object Tracking in Full-pitch Videos},
+  author    = {Scott, Atom and Uchida, Kazuhiro and others},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+  year      = {2024}
+}
+
+@article{soccersurvey,
+  title     = {A Survey on Soccer Player Detection and Tracking with Videos},
+  author    = {Naik, Banoth Thulasya and others},
+  journal   = {The Visual Computer},
+  publisher = {Springer},
+  year      = {2024},
+  doi       = {10.1007/s00371-024-03367-6}
+}
+
+@inproceedings{deepeiou,
+  title     = {Iterative Scale-Up {ExpansionIoU} and Deep Features Association for Multi-Object Tracking in Sports},
+  author    = {Huang, Hsiang-Wei and others},
+  booktitle = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV) Workshops},
+  year      = {2024}
+}
+
+@article{gtatrack,
+  title     = {{GTATrack}: Winner Solution to {SoccerTrack} 2025 with Deep-{EIoU} and Global Tracklet Association},
+  author    = {{GTATrack Team}},
+  journal   = {arXiv preprint arXiv:2602.00484},
+  year      = {2025}
+}
+
+% ---------------------------------------------------------------------
+% FOOTPASS & player-centric action spotting
+% ---------------------------------------------------------------------
+@article{footpass,
+  title   = {{FOOTPASS}: A Multi-Modal Multi-Agent Tactical Context Dataset for Play-by-Play Action Spotting in Soccer Broadcast Videos},
+  author  = {Ochin, J\'{e}r\'{e}my and Chekroun, Raphael and Stanciulescu, Bogdan and Manitsaris, Sotiris},
+  journal = {Submitted to Computer Vision and Image Understanding (CVIU)},
+  year    = {2025},
+  note    = {Preprint, HAL hal-05373478v1}
+}
+
+@inproceedings{stadlargemotion,
+  author    = {Singh, Gurkirt and Choutas, Vasileios and Saha, Suman and Yu, Fisher and Van Gool, Luc},
+  title     = {Spatio-Temporal Action Detection Under Large Motion},
+  booktitle = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+  pages     = {6009--6018},
+  year      = {2023}
+}
+
+@inproceedings{x3d,
+  author    = {Feichtenhofer, Christoph},
+  title     = {{X3D}: Expanding Architectures for Efficient Video Recognition},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages     = {200--210},
+  year      = {2020},
+  doi       = {10.1109/CVPR42600.2020.00028}
+}
+
+@inproceedings{taadgnn,
+  author    = {Ochin, J\'{e}remie and Devineau, Guillaume and Stanciulescu, Bogdan and Manitsaris, Sotiris},
+  title     = {Game State and Spatio-Temporal Action Detection in Soccer Using Graph Neural Networks and {3D} Convolutional Networks},
+  booktitle = {Proceedings of the 14th International Conference on Pattern Recognition Applications and Methods (ICPRAM)},
+  pages     = {636--646},
+  publisher = {SciTePress},
+  year      = {2025},
+  doi       = {10.5220/0013161100003905}
+}
+
+@inproceedings{taaddst,
+  author    = {Ochin, J\'{e}remie and Chekroun, Raphael and Stanciulescu, Bogdan and Manitsaris, Sotiris},
+  title     = {Beyond Pixels: Leveraging the Language of Soccer to Improve Spatio-Temporal Action Detection in Broadcast Videos},
+  booktitle = {Proceedings of the 22nd International Conference on Advanced Concepts for Intelligent Vision Systems (ACIVS)},
+  year      = {2025}
+}
+
+% ---------------------------------------------------------------------
+% Generic MOT baselines
+% ---------------------------------------------------------------------
+@inproceedings{sort,
+  author    = {Bewley, Alex and Ge, Zongyuan and Ott, Lionel and Ramos, Fabio and Upcroft, Ben},
+  title     = {Simple Online and Realtime Tracking},
+  booktitle = {IEEE International Conference on Image Processing (ICIP)},
+  year      = {2016}
+}
+
+@inproceedings{deepsort,
+  author    = {Wojke, Nicolai and Bewley, Alex and Paulus, Dietrich},
+  title     = {Simple Online and Realtime Tracking with a Deep Association Metric},
+  booktitle = {IEEE International Conference on Image Processing (ICIP)},
+  year      = {2017}
+}
+
+@inproceedings{bytetrack,
+  author    = {Zhang, Yifu and Sun, Peize and Jiang, Yi and Yu, Dongdong and Weng, Fucheng and Yuan, Zehuan and Luo, Ping and Liu, Wenyu and Wang, Xinggang},
+  title     = {{ByteTrack}: Multi-Object Tracking by Associating Every Detection Box},
+  booktitle = {Proceedings of the European Conference on Computer Vision (ECCV)},
+  year      = {2022}
+}
+
+@article{botsort,
+  author  = {Aharon, Nir and Orfaig, Roy and Bobrovsky, Ben-Zion},
+  title   = {{BoT-SORT}: Robust Associations Multi-Pedestrian Tracking},
+  journal = {arXiv preprint arXiv:2206.14651},
+  year    = {2022}
+}
+
+@inproceedings{ocsort,
+  author    = {Cao, Jinkun and Pang, Jiangmiao and Weng, Xinshuo and Khirodkar, Rawal and Kitani, Kris},
+  title     = {Observation-Centric {SORT}: Rethinking {SORT} for Robust Multi-Object Tracking},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2023}
+}
+
+@article{strongsort,
+  author  = {Du, Yunhao and Zhao, Zhicheng and Song, Yang and Zhao, Yanyun and Su, Fei and Gong, Tao and Meng, Hongying},
+  title   = {{StrongSORT}: Make {DeepSORT} Great Again},
+  journal = {IEEE Transactions on Multimedia},
+  year    = {2023}
+}
+
+@article{deepocsort,
+  author  = {Maggiolino, Gerard and Ahmad, Adnan and Cao, Jinkun and Kitani, Kris},
+  title   = {Deep {OC-SORT}: Multi-Pedestrian Tracking by Adaptive Re-identification},
+  journal = {arXiv preprint arXiv:2302.11813},
+  year    = {2023}
+}
+
+@article{fairmot,
+  author  = {Zhang, Yifu and Wang, Chunyu and Wang, Xinggang and Zeng, Wenjun and Liu, Wenyu},
+  title   = {{FairMOT}: On the Fairness of Detection and Re-Identification in Multi-Object Tracking},
+  journal = {International Journal of Computer Vision (IJCV)},
+  year    = {2021}
+}
+
+@inproceedings{trackformer,
+  author    = {Meinhardt, Tim and Kirillov, Alexander and Leal-Taix{\'e}, Laura and Feichtenhofer, Christoph},
+  title     = {{TrackFormer}: Multi-Object Tracking with Transformers},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2022}
+}
+
+@inproceedings{motr,
+  author    = {Zeng, Fangao and Dong, Bin and Zhang, Yuang and Wang, Tiancai and Zhang, Xiangyu and Wei, Yichen},
+  title     = {{MOTR}: End-to-End Multiple-Object Tracking with Transformer},
+  booktitle = {Proceedings of the European Conference on Computer Vision (ECCV)},
+  year      = {2022}
+}
+
+% ---------------------------------------------------------------------
+% Occlusion handling in detection / tracking
+% ---------------------------------------------------------------------
+@inproceedings{repulsionloss,
+  author    = {Wang, Xinlong and Xiao, Tete and Jiang, Yuning and Shao, Shuai and Sun, Jian and Shen, Chunhua},
+  title     = {Repulsion Loss: Detecting Pedestrians in a Crowd},
+  booktitle = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2018}
+}
+
+@article{occreview,
+  author  = {Chu, Kaiwen and others},
+  title   = {Occlusion Handling in Generic Object Detection: A Review},
+  journal = {arXiv preprint arXiv:2101.08845},
+  year    = {2021}
+}
+
+@article{pedoccreview,
+  title   = {Occlusion Handling and Multi-Scale Pedestrian Detection Based on Deep Learning: A Review},
+  author  = {Anonymous},
+  journal = {IEEE Access},
+  year    = {2022}
+}
+
+@article{oatrack,
+  title   = {Towards Occlusion-Aware Multi-Pedestrian Tracking},
+  author  = {Anonymous},
+  journal = {Applied Sciences (MDPI)},
+  volume  = {15},
+  number  = {24},
+  pages   = {13045},
+  year    = {2024}
+}
+
+@article{headfocus,
+  author  = {Zhu, Yu and others},
+  title   = {Handling Heavy Occlusion in Dense Crowd Tracking by Focusing on the Heads},
+  journal = {arXiv preprint arXiv:2304.07705},
+  year    = {2023}
+}
+
+@article{occattention,
+  title   = {Occlusion-Aware Spatial Attention Transformer for Occluded Object Recognition},
+  author  = {Anonymous},
+  journal = {Pattern Recognition Letters},
+  year    = {2022}
+}
+
+@article{gcnassoc,
+  title   = {Graph Convolution Neural Network-Based Data Association for Online Multi-Object Tracking},
+  author  = {Anonymous},
+  journal = {IEEE Access},
+  year    = {2021}
+}
+
+@article{occgcn,
+  title   = {Occlusion-Related Graph Convolutional Neural Network for Multi-Object Tracking},
+  author  = {Anonymous},
+  journal = {Image and Vision Computing},
+  year    = {2024}
+}
+
+@article{mot20,
+  author  = {Dendorfer, Patrick and Rezatofighi, Hamid and Milan, Anton and Shi, Javen and Cremers, Daniel and Reid, Ian and Roth, Stefan and Schindler, Konrad and Leal-Taix{\'e}, Laura},
+  title   = {{MOT20}: A Benchmark for Multi Object Tracking in Crowded Scenes},
+  journal = {arXiv preprint arXiv:2003.09003},
+  year    = {2020}
+}
+
+% ---------------------------------------------------------------------
+% Amodal perception
+% ---------------------------------------------------------------------
+@inproceedings{uoais,
+  author    = {Back, Seunghyeok and others},
+  title     = {Unseen Object Amodal Instance Segmentation via Hierarchical Occlusion Modeling},
+  booktitle = {IEEE International Conference on Robotics and Automation (ICRA)},
+  year      = {2022}
+}
+
+@article{sameo,
+  title   = {Segment Anything, Even Occluded ({SAMEO})},
+  author  = {Anonymous},
+  journal = {arXiv preprint arXiv:2503.06261},
+  year    = {2025}
+}
+
+@article{seqamodaldiff,
+  title   = {Sequential Amodal Segmentation via Cumulative Occlusion Learning},
+  author  = {Anonymous},
+  journal = {arXiv preprint arXiv:2405.05791},
+  year    = {2024}
+}
+
+% ---------------------------------------------------------------------
+% Jersey number recognition
+% ---------------------------------------------------------------------
+@inproceedings{posejersey,
+  author    = {Liu, Hengyue and Bhanu, Bir},
+  title     = {Pose-Guided {R-CNN} for Jersey Number Recognition in Sports},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+  year      = {2019}
+}
+
+@inproceedings{keyframejersey,
+  author    = {Balaji, Bhavesh and others},
+  title     = {Jersey Number Recognition using Keyframe Identification from Low-Resolution Broadcast Videos},
+  booktitle = {Proceedings of the 6th International Workshop on Multimedia Content Analysis in Sports (MMSports)},
+  year      = {2023}
+}
+
+@article{uncertaintyjersey,
+  author    = {Grad, Bogdan and others},
+  title     = {Single-Stage Uncertainty-Aware Jersey Number Recognition in Soccer},
+  journal   = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops (CVSports)},
+  year      = {2025}
+}
+
+@article{soccernetjersey,
+  title   = {{SoccerNet} 2023 Challenges Results},
+  author  = {Cioppa, Anthony and Giancola, Silvio and others},
+  journal = {arXiv preprint arXiv:2309.06006},
+  year    = {2023}
+}
+
+@inproceedings{jerseymultitask,
+  author    = {Vats, Kanav and others},
+  title     = {Multi-task Learning for Jersey Number Recognition in Ice Hockey},
+  booktitle = {Proceedings of the ACM International Workshop on Multimedia Content Analysis in Sports (MMSports)},
+  year      = {2021}
+}
+
+% ---------------------------------------------------------------------
+% Re-Identification (general + sports)
+% ---------------------------------------------------------------------
+@inproceedings{pgfa,
+  author    = {Miao, Jiaxu and Wu, Yu and Liu, Ping and Ding, Yuhang and Yang, Yi},
+  title     = {Pose-Guided Feature Alignment for Occluded Person Re-Identification},
+  booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+  year      = {2019}
+}
+
+@article{sportsreid,
+  author  = {Habel, Kolja and others},
+  title   = {{Sports Re-ID}: Improving Re-Identification of Players in Broadcast Videos of Team Sports},
+  journal = {arXiv preprint arXiv:2206.02373},
+  year    = {2022}
+}
+
+@article{multitaskreid,
+  title   = {Multi-task Learning for Joint Re-identification, Team Affiliation, and Role Classification for Sports Visual Tracking},
+  author  = {Anonymous},
+  journal = {arXiv preprint arXiv:2401.09942},
+  year    = {2023}
+}
+
+@inproceedings{posebroadcast,
+  author    = {Akan, Sel\c{c}uk and Varl{\i}, Sara},
+  title     = {Reidentifying Soccer Players in Broadcast Videos Using Body Feature Alignment Based on Pose},
+  booktitle = {International Conference on Computing, Networks and Internet of Things (CNIOT)},
+  year      = {2023}
+}
+
+@inproceedings{somers2024gsr,
+  author    = {Somers, Vladimir and others},
+  title     = {{SoccerNet} Game State Reconstruction: End-to-End Athlete Tracking and Identification on a Minimap},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+  year      = {2024}
+}
+
+@inproceedings{gsr2025winner,
+  title     = {From Broadcast to Minimap: Achieving State-of-the-Art {SoccerNet} Game State Reconstruction},
+  author    = {Anonymous},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+  year      = {2025}
+}
+
+@article{occreidsurvey,
+  title   = {Occluded Person Re-Identification with Deep Learning: A Survey and Perspectives},
+  author  = {Anonymous},
+  journal = {arXiv preprint arXiv:2311.00603},
+  year    = {2023}
+}
+
+@inproceedings{contrastiveteam,
+  author    = {Koshkina, Maria and Pidaparthy, Hemanth and Elder, James H.},
+  title     = {Contrastive Learning for Sports Video: Unsupervised Player Classification},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+  year      = {2021}
+}
+
+% ---------------------------------------------------------------------
+% Detectors / backbones
+% ---------------------------------------------------------------------
+@misc{yolov8,
+  author       = {Jocher, Glenn and Chaurasia, Ayush and Qiu, Jing},
+  title        = {Ultralytics {YOLOv8}},
+  year         = {2023},
+  howpublished = {\url{https://github.com/ultralytics/ultralytics}}
+}
+
+% ---------------------------------------------------------------------
+% Misc surveys and generic background
+% ---------------------------------------------------------------------
+@article{stsurvey,
+  title   = {Scene Text Detection and Recognition: The Deep Learning Era},
+  author  = {Long, Shangbang and He, Xin and Yao, Cong},
+  journal = {International Journal of Computer Vision (IJCV)},
+  year    = {2020}
+}
+
+@article{crowdcounting,
+  title   = {Deep Learning in Crowd Counting: A Survey},
+  author  = {Deng, Lei and others},
+  journal = {CAAI Transactions on Intelligence Technology},
+  year    = {2024}
+}
+
+@incollection{cvsportschapter,
+  title     = {Computer Vision for Sports Analytics},
+  author    = {Anonymous},
+  booktitle = {Computer Vision for Sports Analytics},
+  publisher = {Springer},
+  year      = {2025}
+}

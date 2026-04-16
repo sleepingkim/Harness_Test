@@ -4,7 +4,16 @@
       "WebSearch",
       "WebFetch(domain:www.nature.com)",
       "WebFetch(domain:pmc.ncbi.nlm.nih.gov)",
-      "WebFetch(domain:link.springer.com)"
+      "WebFetch(domain:link.springer.com)",
+      "Bash(curl -s \"https://api.semanticscholar.org/graph/v1/paper/search?query=soccer+player+detection+tracking+multi-object&fields=title,authors,year,abstract,externalIds,citationCount,openAccessPdf&limit=20\")",
+      "Bash(python3 -m json.tool)",
+      "Bash(curl -s \"https://api.semanticscholar.org/graph/v1/paper/search?query=occlusion+handling+multi-object+tracking&fields=title,authors,year,abstract,externalIds,citationCount,openAccessPdf&limit=20\")",
+      "Bash(curl -s \"https://api.semanticscholar.org/graph/v1/paper/search?query=jersey+number+recognition+sports&fields=title,authors,year,abstract,externalIds,citationCount,openAccessPdf&limit=20\")",
+      "Bash(curl *)",
+      "Bash(python *)",
+      "Bash(pip install *)",
+      "Bash(ls *)",
+      "Bash(grep -v \"~\\\\$\")"
     ]
   }
 }

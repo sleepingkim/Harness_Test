@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_workspace2/01_literature_review.md",
-                "mode": "source",
+                "file": "YoungScientist/FOOTPASS-ext/README.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01_literature_review"
+              "title": "README"
             }
           }
         ]
@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200
   },
   "right": {
     "id": "450e8cdc6cd12880",
@@ -185,18 +185,38 @@
   },
   "active": "1186b7aa0e17bd44",
   "lastOpenFiles": [
-    "_workspace2/ieee_paper/~$실용인공지능학술지_v1.2_largefont.docx",
-    "_workspace2/ieee_paper/한국실용인공지능학술지_v1.2_largefont.docx",
-    "_workspace2/ieee_paper/~$실용인공지능학술지_v1.1_figures.docx",
-    "_workspace2/ieee_paper/한국실용인공지능학술지_v1.1_figures.docx",
-    "_workspace2/ieee_paper/~$실용인공지능학술지_v1.0.docx",
-    "_workspace2/ieee_paper/한국실용인공지능학술지_v1.0.docx",
-    "한국실용인공지능학술지_템플릿_최종본.docx",
+    "YoungScientist/Tutorial/run_all.py",
+    "YoungScientist/Tutorial/run_all.py.tmp.28088.1776326531902",
+    "YoungScientist/Tutorial/outputs/06_simple_tracker.png",
+    "YoungScientist/Tutorial/outputs/05_binary_vs_soft_mask.png",
+    "YoungScientist/Tutorial/outputs/04_roi_align_demo.png",
+    "YoungScientist/Tutorial/outputs/03_iou_visualization.png",
+    "YoungScientist/Tutorial/examples/07_footpass_taad_walkthrough.py",
+    "YoungScientist/Tutorial/examples/06_simple_iou_tracker.py",
+    "YoungScientist/Tutorial/examples/05_binary_vs_soft_mask.py",
+    "YoungScientist/Tutorial/examples/04_roi_align_from_scratch.py",
+    "YoungScientist/Tutorial/examples/03_bounding_box_basics.py",
+    "YoungScientist/Tutorial/outputs/02_normalization_steps.png",
+    "YoungScientist/Tutorial/data/dummy_frame.png",
+    "YoungScientist/Tutorial/examples/__pycache__/_common.cpython-314.pyc",
+    "YoungScientist/Tutorial/examples/__pycache__",
+    "YoungScientist/Tutorial/examples/02_image_to_tensor.py",
+    "YoungScientist/Tutorial/examples/02_image_to_tensor.py.tmp.28088.1776324186736",
+    "YoungScientist/Tutorial/README.md",
+    "YoungScientist/_workspace/04_method_analysis_table.md",
+    "YoungScientist/FOOTPASS-ext/notes/integration_plan.md",
+    "YoungScientist/FOOTPASS-ext/README.md",
+    "YoungScientist/_workspace/paper/README.md",
+    "YoungScientist/_workspace/03_method_analysis.md",
+    "YoungScientist/_workspace/05_research_design.md",
+    "YoungScientist/_workspace/02_literature_table.md",
+    "YoungScientist/_workspace/01_literature_review.md",
+    "YoungScientist/FOOTPASS-main/graphical_abstract.png",
+    "YoungScientist/FOOTPASS-main/README.md",
+    "_workspace2/01_literature_review.md",
     "_workspace2/02_research_design.md",
     "_workspace2/03_biomarker_synthesis.md",
     "_workspace2/PROCESS.md",
-    "_workspace2/ieee_paper/main_v1.1_tikz-figures.tex",
-    "_workspace2/ieee_paper/tikz_figures.tex",
     "_workspace/PROCESS.md",
     "_workspace/camera/01_camera_literature_review.md",
     "_workspace/camera/reference_validation_report.md",
