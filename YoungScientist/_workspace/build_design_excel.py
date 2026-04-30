@@ -141,7 +141,7 @@ for b in baselines:
         cell.alignment = Alignment(vertical="top", wrap_text=True)
         cell.border = border
         cell.fill = PatternFill(start_color="E2EFDA", end_color="E2EFDA", fill_type="solid")
-        cell.font = Font(size=10)
+        cell.font = Font(size=10)ㄹ
     row += 1
 
 # 3.2 Ablation

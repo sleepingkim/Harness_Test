@@ -13,7 +13,26 @@
       "Bash(python *)",
       "Bash(pip install *)",
       "Bash(ls *)",
-      "Bash(grep -v \"~\\\\$\")"
+      "Bash(grep -v \"~\\\\$\")",
+      "WebFetch(domain:arxiv.org)",
+      "WebFetch(domain:www.frontiersin.org)",
+      "WebFetch(domain:dl.acm.org)",
+      "WebFetch(domain:www.thelancet.com)",
+      "PowerShell(cd \"C:\\\\Users\\\\neohc\\\\Desktop\\\\ClaudeCode\\\\_workspace3\"; $env:PYTHONIOENCODING=\"utf-8\"; python -c \"from openpyxl import load_workbook; wb = load_workbook\\('face_voice_biomarker_papers.xlsx'\\); [print\\(f'{s.title}: {s.max_row-1} data rows, {s.max_column} cols'\\) for s in wb.worksheets]\")",
+      "WebFetch(domain:www.cell.com)",
+      "WebFetch(domain:pubs.asha.org)",
+      "WebFetch(domain:formative.jmir.org)",
+      "WebFetch(domain:www.jmir.org)",
+      "WebFetch(domain:mhealth.jmir.org)",
+      "WebFetch(domain:bmcmedinformdecismak.biomedcentral.com)",
+      "WebFetch(domain:www.mdpi.com)",
+      "WebFetch(domain:bmcmedethics.biomedcentral.com)",
+      "WebFetch(domain:pubmed.ncbi.nlm.nih.gov)",
+      "WebFetch(domain:www.sciencedirect.com)",
+      "WebFetch(domain:ihi.org)",
+      "WebFetch(domain:community.the-hospitalist.org)",
+      "WebFetch(domain:www.eksss.org)",
+      "WebFetch(domain:kjnt.org)"
     ]
   }
 }

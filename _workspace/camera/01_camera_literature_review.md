@@ -69,16 +69,16 @@
 
 ## 4. 안구/동공 분석 바이오마커
 
-| 바이오마커 | 탐지 질환 | 사용 모델 | 성능 지표 | 실험 환경 | 증거 수준 | DOI/URL | 출처 |
-|---|---|---|---|---|---|---|---|
-| 시선 추적 (Eye Tracking) | 경도인지장애(MCI)/알츠하이머 | AI 기반 태블릿 시선 추적 (m-ETA) | MCI 선별 도구로 유망; 커뮤니티 기반 대규모 선별 가능 | In-the-wild (커뮤니티) | **Moderate** | [Alzheimer's Res & Ther](https://link.springer.com/article/10.1186/s13195-025-01884-7) | m-ETA 중국 연구, 2025, *Alzheimer's Res & Therapy* [지식 기반] |
-| 시선 추적 (Eye Tracking) | 알츠하이머/MCI | AI 시선 추적 + 모바일 | 모바일 기기 기반 AD 예측 모델 구축 | Lab | **Limited** | [Springer](https://link.springer.com/article/10.1007/s40520-024-02882-9) | AI eye-tracking AD, 2024, *Aging Clin Exp Res* [지식 기반] |
-| 시선 추적 + VR | 치매 선별 | Eye tracking + ML + VR (VECA) | 비침습적, 효율적 선별 도구; n=다수 | Lab | **Moderate** | [npj Digital Med](https://www.nature.com/articles/s41746-024-01206-5) | VECA 연구, 2024, *npj Digital Medicine* [지식 기반] |
-| 시선 추적 + CPT | ADHD | AI 기반 시선 추적 (태블릿) | 112 ADHD + 325 정상 아동; 기존 CPT 대비 진단 정확도 향상 | Lab (학교/커뮤니티) | **Moderate** (n=437) | [Frontiers](https://www.frontiersin.org/journals/psychiatry/articles/10.3389/fpsyt.2024.1337595/full) | ADHD 시선 추적, 2024, *Frontiers in Psychiatry* [지식 기반] |
-| 시선 추적 + AI | ADHD | 태블릿/스마트폰 시선 추적 | 시선 추적 + CPT 통합 시 단독 CPT 대비 진단력 향상 | Lab | **Moderate** | [JMIR mHealth](https://mhealth.jmir.org/2024/1/e58927) | ADHD 디지털 바이오마커, 2024, *JMIR mHealth uHealth* [지식 기반] |
-| 동공 크기 변화 | ADHD | 스마트폰 근적외선 카메라 + 셀피 카메라 | 동공 반응으로 신경학적 질환 선별 가능 | Lab (파일럿) | **Exploratory** | [ScienceDaily](https://www.sciencedaily.com/releases/2022/04/220429144904.htm) | 스마트폰 동공 앱, 2022, *ScienceDaily* [지식 기반] |
-| 안저 촬영 (스마트폰) | 녹내장 | iGlaucoma (DL 기반) | 정확도 99.0%, AUC 0.966, 민감도 95.4%, 특이도 87.3% | Lab (임상) | **Moderate** | [Nature Eye](https://www.nature.com/articles/s41433-023-02826-z) | iGlaucoma, 2023, *Eye* [지식 기반] |
-| 안저 촬영 (스마트폰) | 백내장 | 스마트폰 카메라 + AI | Redmi 9A 13MP 카메라 활용; 임상 검증 진행 | In-the-wild (현장) | **Moderate** | [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC11560082/) | 백내장 스마트폰 앱, 2024, *PMC* [지식 기반] |
+| 바이오마커                | 탐지 질환             | 사용 모델                         | 성능 지표                                      | 실험 환경              | 증거 수준                | DOI/URL                                                                                               | 출처                                                     |
+| -------------------- | ----------------- | ----------------------------- | ------------------------------------------ | ------------------ | -------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| 시선 추적 (Eye Tracking) | 경도인지장애(MCI)/알츠하이머 | AI 기반 태블릿 시선 추적 (m-ETA)       | MCI 선별 도구로 유망; 커뮤니티 기반 대규모 선별 가능           | In-the-wild (커뮤니티) | **Moderate**         | [Alzheimer's Res & Ther](https://link.springer.com/article/10.1186/s13195-025-01884-7)                | m-ETA 중국 연구, 2025, *Alzheimer's Res & Therapy* [지식 기반] |
+| 시선 추적 (Eye Tracking) | 알츠하이머/MCI         | AI 시선 추적 + 모바일                | 모바일 기기 기반 AD 예측 모델 구축                      | Lab                | **Limited**          | [Springer](https://link.springer.com/article/10.1007/s40520-024-02882-9)                              | AI eye-tracking AD, 2024, *Aging Clin Exp Res* [지식 기반] |
+| 시선 추적 + VR           | 치매 선별             | Eye tracking + ML + VR (VECA) | 비침습적, 효율적 선별 도구; n=다수                      | Lab                | **Moderate**         | [npj Digital Med](https://www.nature.com/articles/s41746-024-01206-5)                                 | VECA 연구, 2024, *npj Digital Medicine* [지식 기반]          |
+| 시선 추적 + CPT          | ADHD              | AI 기반 시선 추적 (태블릿)             | 112 ADHD + 325 정상 아동; 기존 CPT 대비 진단 정확도 향상  | Lab (학교/커뮤니티)      | **Moderate** (n=437) | [Frontiers](https://www.frontiersin.org/journals/psychiatry/articles/10.3389/fpsyt.2024.1337595/full) | ADHD 시선 추적, 2024, *Frontiers in Psychiatry* [지식 기반]    |
+| 시선 추적 + AI           | ADHD              | 태블릿/스마트폰 시선 추적                | 시선 추적 + CPT 통합 시 단독 CPT 대비 진단력 향상          | Lab                | **Moderate**         | [JMIR mHealth](https://mhealth.jmir.org/2024/1/e58927)                                                | ADHD 디지털 바이오마커, 2024, *JMIR mHealth uHealth* [지식 기반]   |
+| 동공 크기 변화             | ADHD              | 스마트폰 근적외선 카메라 + 셀피 카메라        | 동공 반응으로 신경학적 질환 선별 가능                      | Lab (파일럿)          | **Exploratory**      | [ScienceDaily](https://www.sciencedaily.com/releases/2022/04/220429144904.htm)                        | 스마트폰 동공 앱, 2022, *ScienceDaily* [지식 기반]                |
+| 안저 촬영 (스마트폰)         | 녹내장               | iGlaucoma (DL 기반)             | 정확도 99.0%, AUC 0.966, 민감도 95.4%, 특이도 87.3% | Lab (임상)           | **Moderate**         | [Nature Eye](https://www.nature.com/articles/s41433-023-02826-z)                                      | iGlaucoma, 2023, *Eye* [지식 기반]                         |
+| 안저 촬영 (스마트폰)         | 백내장               | 스마트폰 카메라 + AI                 | Redmi 9A 13MP 카메라 활용; 임상 검증 진행             | In-the-wild (현장)   | **Moderate**         | [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC11560082/)                                             | 백내장 스마트폰 앱, 2024, *PMC* [지식 기반]                        |
 
 ---
 
