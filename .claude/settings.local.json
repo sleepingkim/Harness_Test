@@ -32,7 +32,15 @@
       "WebFetch(domain:ihi.org)",
       "WebFetch(domain:community.the-hospitalist.org)",
       "WebFetch(domain:www.eksss.org)",
-      "WebFetch(domain:kjnt.org)"
+      "WebFetch(domain:kjnt.org)",
+      "Bash(brew list:*)",
+      "Bash(python3:*)",
+      "Bash(brew install:*)",
+      "Bash(pdftotext \"/Users/macbook/Desktop/08.ClaudeCode/_workspace5/프렉티컴보고서_최종본.pdf\" \"/Users/macbook/Desktop/08.ClaudeCode/_workspace5/프렉티컴보고서.txt\")",
+      "Bash(pdftotext \"/Users/macbook/Desktop/08.ClaudeCode/_workspace5/공구 카탈로그_sangbo.pdf\" \"/Users/macbook/Desktop/08.ClaudeCode/_workspace5/공구카탈로그.txt\")",
+      "WebFetch(domain:namu.wiki)",
+      "WebFetch(domain:brunch.co.kr)",
+      "WebFetch(domain:www.kocowa.or.kr)"
     ]
   }
 }
