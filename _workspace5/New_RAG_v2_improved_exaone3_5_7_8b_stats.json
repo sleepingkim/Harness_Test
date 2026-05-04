@@ -1,0 +1,17 @@
+{
+  "model_name": "exaone3.5:7.8b",
+  "embed_model": "dragonkue/BGE-m3-ko",
+  "variant": "improved",
+  "k_value": 15,
+  "bm25_alpha": 0.4,
+  "total": 3352,
+  "embed_sec": 10.7,
+  "llm_sec": 2731.7,
+  "total_sec": 2742.5,
+  "speed_per_sec": 1.23,
+  "eval_count": 451,
+  "correct": 357,
+  "accuracy": 0.7916,
+  "fallback_rate": 0.0919,
+  "error_rate": 0.0
+}

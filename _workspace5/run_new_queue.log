@@ -1,0 +1,20 @@
+[11:20:36] ===== 새 우선순위 큐 시작 =====
+[11:20:36] 순서: 소형 6개 → 소형 리포트 → 대형 6개 → qwen 2개 → 전체 리포트
+[11:20:36] ===== [PART 1] 소형 모델 6개 시작 =====
+[11:20:36] === deepseek-r1:1.5b improved 시작 ===
+[11:58:17] deepseek-r1:1.5b improved 완료.
+[11:58:17] === exaone3.5:2.4b improved 시작 ===
+[12:33:56] exaone3.5:2.4b improved 완료.
+[12:33:56] === granite4.1:3b improved 시작 ===
+[13:10:33] granite4.1:3b improved 완료.
+[13:10:33] === gemma3:4b improved 시작 ===
+[13:42:18] gemma3:4b improved 완료.
+[13:42:18] === exaone3.5:7.8b improved 시작 ===
+[14:28:07] exaone3.5:7.8b improved 완료.
+[14:28:07] === gemma4:e2b improved 시작 ===
+[14:57:24] gemma4:e2b improved 완료.
+[14:57:24] ===== [PART 1] 소형 모델 6개 완료 =====
+[14:57:24] === 소형 모델 비교 리포트 생성 ===
+[14:57:26] 소형 모델 비교 리포트 완료.
+[14:57:26] ===== [PART 2] 대형 모델 6개 시작 (qwen 제외) =====
+[14:57:26] === granite4.1:30b improved 시작 ===

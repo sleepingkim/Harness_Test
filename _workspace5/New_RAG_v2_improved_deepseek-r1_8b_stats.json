@@ -1,0 +1,17 @@
+{
+  "model_name": "deepseek-r1:8b",
+  "embed_model": "dragonkue/BGE-m3-ko",
+  "variant": "improved",
+  "k_value": 15,
+  "bm25_alpha": 0.4,
+  "total": 3352,
+  "embed_sec": 29.0,
+  "llm_sec": 2386.0,
+  "total_sec": 2415.0,
+  "speed_per_sec": 1.4,
+  "eval_count": 451,
+  "correct": 351,
+  "accuracy": 0.7783,
+  "fallback_rate": 0.026,
+  "error_rate": 0.0003
+}

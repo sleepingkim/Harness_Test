@@ -1,0 +1,10 @@
+소형 모델 결과: 6개
+  gemma3:4b [improved]: 84.48%
+  gemma4:e2b [improved]: 80.93%
+  exaone3.5:7.8b [improved]: 79.16%
+  deepseek-r1:1.5b [improved]: 78.05%
+  exaone3.5:2.4b [improved]: 74.06%
+  granite4.1:3b [improved]: 67.85%
+차트 저장: /mnt/c/Users/neohc/Desktop/ClaudeCode/_workspace5/small_models_chart.png
+리포트 저장: /mnt/c/Users/neohc/Desktop/ClaudeCode/_workspace5/small_models_report.md
+완료.

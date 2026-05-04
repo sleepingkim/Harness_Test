@@ -1,0 +1,17 @@
+{
+  "model_name": "gemma3:4b",
+  "embed_model": "dragonkue/BGE-m3-ko",
+  "variant": "improved",
+  "k_value": 15,
+  "bm25_alpha": 0.4,
+  "total": 3352,
+  "embed_sec": 8.1,
+  "llm_sec": 1892.3,
+  "total_sec": 1900.5,
+  "speed_per_sec": 1.77,
+  "eval_count": 451,
+  "correct": 381,
+  "accuracy": 0.8448,
+  "fallback_rate": 0.065,
+  "error_rate": 0.0
+}

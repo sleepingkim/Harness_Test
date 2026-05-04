@@ -1,0 +1,20 @@
+[00:53:12] === qwen3.5:9b baseline 시작 ===
+[01:36:07] qwen3.5:9b baseline 완료.
+[01:36:07] === deepseek-r1:8b improved 시작 ===
+[02:16:30] deepseek-r1:8b improved 완료.
+[02:16:30] === granite4.1:8b improved 시작 ===
+[03:02:57] granite4.1:8b improved 완료.
+[03:02:57] === qwen3.5:9b improved 시작 ===
+Terminated
+[09:21:21] qwen3.5:9b improved 완료.
+[09:21:21] === 대형 모델 큐 시작 (qwen 최하위 정책 적용) ===
+[09:21:21] ===== 대형 모델 실험 시작 =====
+[09:21:21] === deepseek-r1:32b improved 시작 ===
+Terminated
+[10:16:06] deepseek-r1:32b improved 완료.
+[10:16:06] === granite4.1:30b improved 시작 ===
+Terminated
+[11:19:08] granite4.1:30b improved 완료.
+[11:19:08] === EXAONE-4.5-33B improved 시작 ===
+Terminated
+[11:19:33] === qwen3.5:9b baseline 재실행 (IS_QWEN3 수정 적용) ===

@@ -1,0 +1,17 @@
+{
+  "model_name": "granite4.1:8b",
+  "embed_model": "dragonkue/BGE-m3-ko",
+  "variant": "improved",
+  "k_value": 15,
+  "bm25_alpha": 0.4,
+  "total": 3352,
+  "embed_sec": 9.8,
+  "llm_sec": 2769.5,
+  "total_sec": 2779.3,
+  "speed_per_sec": 1.21,
+  "eval_count": 451,
+  "correct": 372,
+  "accuracy": 0.8248,
+  "fallback_rate": 0.0501,
+  "error_rate": 0.0
+}

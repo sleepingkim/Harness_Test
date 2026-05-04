@@ -40,7 +40,8 @@
       "Bash(pdftotext \"/Users/macbook/Desktop/08.ClaudeCode/_workspace5/공구 카탈로그_sangbo.pdf\" \"/Users/macbook/Desktop/08.ClaudeCode/_workspace5/공구카탈로그.txt\")",
       "WebFetch(domain:namu.wiki)",
       "WebFetch(domain:brunch.co.kr)",
-      "WebFetch(domain:www.kocowa.or.kr)"
+      "WebFetch(domain:www.kocowa.or.kr)",
+      "Bash(wsl *)"
     ]
   }
 }

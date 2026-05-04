@@ -1,0 +1,13 @@
+{
+  "model_name": "granite4.1:8b",
+  "total": 3352,
+  "embed_sec": 5.9,
+  "llm_sec": 2652,
+  "total_sec": 2658,
+  "speed_per_sec": 1.26,
+  "eval_count": 451,
+  "correct": 249,
+  "accuracy": 0.5521,
+  "fallback_rate": 0.1491,
+  "error_rate": 0.0
+}

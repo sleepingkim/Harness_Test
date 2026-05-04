@@ -1,0 +1,11 @@
+﻿Input_Name,status,rag_top1,rag_candidates,standard_name,brand,power_source,specification,fallback_used,gt_standard_name,is_correct
+180mm 샌더,success,클램프미터,"클램프미터, 고속절단기, 전동공구세트, 별렌치세트, 스패너세트",전동공구세트,,충전식,180mm,False,샌더,False
+LED 손전등,success,LED손전등,"LED손전등, LED투광기, LED작업등, 레이저수평기, 라돈측정기",LED손전등,,LED,,False,LED손전등,True
+경랑몽키(8인치),success,옵셋렌치,"옵셋렌치, 앵글그라인더, 다이아고날플라이어, 플라이어렌치, 굽은노즈플라이어",옵셋렌치,밀워키,가스,8인치,True,몽키렌치,False
+고압세척기,success,고압세척기,"고압세척기, 타일컷터, 편구스패너, 와이어스트리퍼, 전선릴",고압세척기,,에어,,False,고압세척기,True
+바이스플라이어,success,스냅링플라이어,"스냅링플라이어, 앵글그라인더, 다이아고날플라이어, 플라이어렌치, 옵셋렌치",스냅링플라이어,,,,False,바이스그립플라이어,False
+보쉬 pushdrive,success,SDS드릴비트,"SDS드릴비트, 고속절단기, 정밀드라이버세트, 철공용드릴비트, 목공용드릴비트",SDS드릴비트,보쉬(BOSCH),유선/충전식,,False,전동드라이버,False
+보쉬 수공구세트,success,목공줄,"목공줄, 공구세트, 기어렌치세트, 전동공구세트, 스패너세트",공구세트,보쉬(BOSCH),,,False,공구세트,True
+임팩트 진동드릴,success,임팩트드릴,"임팩트드릴, 만능렌치, 그립망치, 빠루망치, 납볼망치",임팩트드릴,,충전식,,False,,
+저소음 컴프레서,success,옵셋렌치,"옵셋렌치, 스냅링플라이어, 플라이어렌치, 굽은노즈플라이어, 충전해머드릴",옵셋렌치,,가스,,False,,
+"전동드릴(무선, 보쉬)",success,전동드릴,"전동드릴, 전선릴, 편구스패너, 쇠지렛대, 충전해머드릴",전동드릴,보쉬(BOSCH),무선,,False,충전드릴,False
