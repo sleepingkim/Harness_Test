@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_workspace5/presentation_draft_v3.md",
+                "file": "_workspace5/llm_comparison_conclusions.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "presentation_draft_v3"
+              "title": "llm_comparison_conclusions"
             }
           }
         ]
@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 224.5
+    "width": 432.5
   },
   "right": {
     "id": "450e8cdc6cd12880",
@@ -185,23 +185,28 @@
   },
   "active": "1186b7aa0e17bd44",
   "lastOpenFiles": [
+    "_workspace5/presentation_draft_v3.md",
+    "_workspace5/small_models_chart.png",
+    "_workspace5/small_models_report.md",
+    "_workspace5/presentation_draft.md",
+    "_workspace5/presentation_draft_annotated.md",
+    "_workspace5/charts/chart5_pareto.png",
+    "_workspace5/charts/chart4_llm_contribution.png",
+    "_workspace5/charts/chart3_error_breakdown.png",
+    "_workspace5/charts/chart2_vram_vs_accuracy.png",
+    "_workspace5/charts/chart1_accuracy.png",
+    "_workspace5/charts",
+    "_workspace5/generate_conclusions_charts.py",
+    "_workspace5/llm_comparison_conclusions.md",
     "_workspace5/~$발표초안_v1.pptx",
     "_workspace5/발표초안_v1.pptx",
     "_workspace5/generate_ppt.py",
-    "_workspace5/presentation_draft_annotated.md",
-    "_workspace5/presentation_draft_v3.md",
     "_workspace5/error_analysis_v2.xlsx",
     "_workspace5/save_excel_only.py",
     "_workspace5/~$error_analysis_result.xlsx",
     "_workspace5/error_analysis_result.xlsx",
     "_workspace5/error_analysis_result.csv",
-    "_workspace5/error_analysis.py",
-    "_workspace5/presentation_draft.md",
-    "_workspace5/small_models_chart.png",
-    "_workspace5/small_models_report.md",
     "_workspace4/04_korean_voice_literature.md",
-    "_workspace5/New_RAG_v2_improved_gemma4_e4b_stats.json",
-    "_workspace5/New_RAG_v2_improved_gemma4_e4b_3352.csv",
     "_workspace4/04_korean_voice_synthesis.md",
     "_workspace4/01_ux_methodology_literature.md",
     "_workspace4/02_ux_synthesis.md",
@@ -222,13 +227,8 @@
     "_workspace2/paper_summary.md",
     "_workspace2/02_research_design.md",
     "_workspace2/03_biomarker_synthesis.md",
-    "_workspace2/glossary.md",
     "YoungScientist/Tutorial/outputs/06_simple_tracker.png",
     "YoungScientist/Tutorial/outputs/05_binary_vs_soft_mask.png",
-    "YoungScientist/Tutorial/outputs/04_roi_align_demo.png",
-    "YoungScientist/Tutorial/outputs/03_iou_visualization.png",
-    "YoungScientist/Tutorial/outputs/02_normalization_steps.png",
-    "YoungScientist/Tutorial/data/dummy_frame.png",
-    "YoungScientist/FOOTPASS-main/graphical_abstract.png"
+    "YoungScientist/Tutorial/outputs/04_roi_align_demo.png"
   ]
 }
