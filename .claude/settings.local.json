@@ -41,7 +41,12 @@
       "WebFetch(domain:namu.wiki)",
       "WebFetch(domain:brunch.co.kr)",
       "WebFetch(domain:www.kocowa.or.kr)",
-      "Bash(wsl *)"
+      "Bash(wsl *)",
+      "Bash(Move-Item \"C:\\\\Users\\\\neohc\\\\Desktop\\\\ClaudeCode\\\\_workspace\" \"C:\\\\Users\\\\neohc\\\\Desktop\\\\ClaudeCode\\\\mHealth_biomarker_research\\\\_workspace1\")",
+      "Bash(Move-Item \"C:\\\\Users\\\\neohc\\\\Desktop\\\\ClaudeCode\\\\_workspace2\" \"C:\\\\Users\\\\neohc\\\\Desktop\\\\ClaudeCode\\\\mHealth_biomarker_research\\\\_workspace2\")",
+      "Bash(Move-Item \"C:\\\\Users\\\\neohc\\\\Desktop\\\\ClaudeCode\\\\_workspace3\" \"C:\\\\Users\\\\neohc\\\\Desktop\\\\ClaudeCode\\\\mHealth_biomarker_research\\\\_workspace3\")",
+      "Bash(Move-Item \"C:\\\\Users\\\\neohc\\\\Desktop\\\\ClaudeCode\\\\_workspace4\" \"C:\\\\Users\\\\neohc\\\\Desktop\\\\ClaudeCode\\\\mHealth_biomarker_research\\\\_workspace4\")",
+      "PowerShell(Move-Item *)"
     ]
   }
 }
