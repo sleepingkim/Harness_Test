@@ -46,7 +46,23 @@
       "Bash(Move-Item \"C:\\\\Users\\\\neohc\\\\Desktop\\\\ClaudeCode\\\\_workspace2\" \"C:\\\\Users\\\\neohc\\\\Desktop\\\\ClaudeCode\\\\mHealth_biomarker_research\\\\_workspace2\")",
       "Bash(Move-Item \"C:\\\\Users\\\\neohc\\\\Desktop\\\\ClaudeCode\\\\_workspace3\" \"C:\\\\Users\\\\neohc\\\\Desktop\\\\ClaudeCode\\\\mHealth_biomarker_research\\\\_workspace3\")",
       "Bash(Move-Item \"C:\\\\Users\\\\neohc\\\\Desktop\\\\ClaudeCode\\\\_workspace4\" \"C:\\\\Users\\\\neohc\\\\Desktop\\\\ClaudeCode\\\\mHealth_biomarker_research\\\\_workspace4\")",
-      "PowerShell(Move-Item *)"
+      "PowerShell(Move-Item *)",
+      "Bash(csv\")",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\neohc\\\\Desktop\\\\ClaudeCode\\\\_workspace5\\\\\" | Where-Object { $_.Name -match \"checkpoint|\\\\.csv\" } | Select-Object Name)",
+      "PowerShell(pip install *)",
+      "PowerShell(python -c \"import pandas; print\\(pandas.__version__\\)\" 2>&1)",
+      "PowerShell($env:PYTHONIOENCODING = \"utf-8\"; cd \"C:\\\\Users\\\\neohc\\\\Desktop\\\\ClaudeCode\\\\_workspace5\"; python analyze_by_type.py 2>&1)",
+      "PowerShell($env:PYTHONIOENCODING = \"utf-8\"; cd \"C:\\\\Users\\\\neohc\\\\Desktop\\\\ClaudeCode\\\\_workspace5\"; python analyze_by_type.py 2>&1 | Where-Object { $_ -notmatch \"UserWarning|Glyph|plt\\\\.|savefig|tight_layout|font\" })",
+      "PowerShell($env:PYTHONIOENCODING = \"utf-8\"; cd \"C:\\\\Users\\\\neohc\\\\Desktop\\\\ClaudeCode\\\\_workspace5\"; python analyze_by_type.py 2>&1 | Where-Object { $_ -notmatch \"UserWarning|Glyph|missing from\" })",
+      "PowerShell($env:PYTHONIOENCODING = \"utf-8\"; cd \"C:\\\\Users\\\\neohc\\\\Desktop\\\\ClaudeCode\\\\_workspace5\"; python extract_cross_model.py 2>&1)",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\neohc\\\\Desktop\\\\ClaudeCode\\\\_workspace5\\\\\" | Where-Object { $_.Name -match \"\\\\.png$|\\\\.xlsx$|_report\\\\.md$\" } | Select-Object Name, @{N='크기\\(KB\\)';E={[math]::Round\\($_.Length/1KB,1\\)}} | Format-Table -AutoSize)",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\neohc\\\\Desktop\\\\ClaudeCode\\\\_workspace5\\\\\" | Where-Object { $_.Name -match \"presentation|poster|QA|report|conclusion|update\" } | Select-Object Name, LastWriteTime | Sort-Object LastWriteTime -Descending | Format-Table -AutoSize)",
+      "PowerShell(try { $r = Invoke-RestMethod -Uri \"http://localhost:11434/api/tags\" -Method Get; $r.models | Select-Object name } catch { Write-Host \"Ollama 미응답: $_\" })",
+      "PowerShell(Get-Command *)",
+      "PowerShell(wsl -- /home/neohc/miniconda3/bin/python3 -c \"print\\('Python OK'\\)\" 2>&1)",
+      "PowerShell(wsl -- /home/neohc/miniconda3/bin/python3 /mnt/c/Users/neohc/Desktop/ClaudeCode/_workspace5/run_llm_only_wsl.py 2>&1 | Select-Object -First 5)",
+      "PowerShell(wsl -- /home/neohc/miniconda3/bin/python3 /mnt/c/Users/neohc/Desktop/ClaudeCode/_workspace5/analyze_llm_only.py 2>&1)",
+      "PowerShell(wsl -- /home/neohc/miniconda3/bin/python3 /mnt/c/Users/neohc/Desktop/ClaudeCode/_workspace5/analyze_llm_only_wsl.py 2>&1)"
     ]
   }
 }

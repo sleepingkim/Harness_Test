@@ -95,15 +95,15 @@ RAG v2는 다음의 설계 원칙을 기반으로 구축하였다:
 
 ### 3.2 시스템 환경
 
-| 구성 요소 | RAG v2 설정 |
-|----------|------------|
-| OS | Windows 11 + WSL2 (Ubuntu) |
-| GPU | NVIDIA RTX 5080 (VRAM 17.1GB) |
-| Python | miniconda3 (3.11) |
-| LLM 도구 | Ollama (GPU 100% 사용) |
-| 실험 대상 | 3,352개 고유 공구 이름 (전체) |
-| 평가 데이터셋 | ground_truth_v2 (457개 정답 쌍) |
-| GPU 활용 | 임베딩(sentence-transformers CUDA), LLM(ollama) |
+| 구성 요소   | RAG v2 설정                                    |
+| ------- | -------------------------------------------- |
+| OS      | Windows 11 + WSL2 (Ubuntu)                   |
+| GPU     | NVIDIA RTX 5080 (VRAM 17.1GB)                |
+| Python  | miniconda3 (3.11)                            |
+| LLM 도구  | Ollama (GPU 100% 사용)                         |
+| 실험 대상   | 3,352개 고유 공구 이름 (전체)                         |
+| 평가 데이터셋 | ground_truth_v2 (457개 정답 쌍)                  |
+| GPU 활용  | 임베딩(sentence-transformers CUDA), LLM(ollama) |
 
 > **참고**: v1(Mac Mini M1 CPU) 대비 LLM 처리 속도가 약 10배 이상 향상됨. 임베딩은 배치 처리(3,352개 일괄)로 수 초 내 완료.
 

@@ -13,12 +13,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "mHealth_biomarker_research/detailed_study_analysis.md",
+                "file": "_workspace5/poster_content_ko_v3.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "detailed_study_analysis"
+              "title": "poster_content_ko_v3"
+            }
+          },
+          {
+            "id": "3f78a7d8a8f4f245",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "_workspace5/llm_comparison_conclusions.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "llm_comparison_conclusions"
             }
           }
         ]
@@ -78,7 +92,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 293.5
   },
   "right": {
     "id": "450e8cdc6cd12880",
@@ -185,51 +199,50 @@
   },
   "active": "1186b7aa0e17bd44",
   "lastOpenFiles": [
-    "mHealth_biomarker_research/data_collection_analysis_summary.md",
-    "mHealth_biomarker_research/detailed_study_analysis.md",
-    "mHealth_biomarker_research/CONTEXT.md",
-    "mHealth_biomarker_research/_workspace1/03_novel_proposals.md",
-    "mHealth_biomarker_research/_workspace1/02_biomarker_catalog.md",
-    "mHealth_biomarker_research/_workspace1/01_literature_review.md",
-    "_workspace3/03_synthesis.md",
-    "mHealth_biomarker_research/_workspace4/reference_validation_ux.md",
-    "mHealth_biomarker_research/_workspace4/07_GeMAPS_paper_summary.md",
-    "mHealth_biomarker_research/_workspace4/06_voice_feature_extraction.md",
-    "mHealth_biomarker_research/_workspace4/04_korean_voice_literature.md",
-    "mHealth_biomarker_research/_workspace4/05_ux_synthesis_ko_integrated.md",
-    "mHealth_biomarker_research/_workspace4/04_korean_voice_synthesis.md",
-    "mHealth_biomarker_research/_workspace4/02_ux_synthesis.md",
-    "mHealth_biomarker_research/_workspace4/01_ux_methodology_literature.md",
-    "mHealth_biomarker_research/_workspace4",
-    "mHealth_biomarker_research/_workspace3/reference_validation_voice.md",
-    "mHealth_biomarker_research/_workspace3/reference_validation_face.md",
-    "mHealth_biomarker_research/_workspace3/face_voice_biomarker_papers.xlsx",
-    "mHealth_biomarker_research/_workspace3/create_excel.py",
-    "mHealth_biomarker_research/_workspace3/03_synthesis.md",
-    "mHealth_biomarker_research/_workspace3/02_voice_biomarker_literature.md",
-    "mHealth_biomarker_research/_workspace3/01_face_biomarker_literature.md",
-    "mHealth_biomarker_research/_workspace3",
-    "mHealth_biomarker_research/_workspace2/ieee_paper/한국실용인공지능학술지_v1.3_author-info.docx",
-    "mHealth_biomarker_research/_workspace2/ieee_paper/한국실용인공지능학술지_v1.2_largefont.docx",
-    "mHealth_biomarker_research/_workspace2/ieee_paper/한국실용인공지능학술지_v1.1_figures.docx",
-    "mHealth_biomarker_research/_workspace2/ieee_paper/한국실용인공지능학술지_v1.0.docx",
-    "mHealth_biomarker_research/_workspace2/ieee_paper/~$실용인공지능학술지_v1.3_author-info.docx",
-    "mHealth_biomarker_research/_workspace2/ieee_paper/tikz_figures.tex",
-    "mHealth_biomarker_research/_workspace2/ieee_paper/README.md",
-    "mHealth_biomarker_research/_workspace2/process_log.md",
-    "mHealth_biomarker_research/_workspace2/reference_validation_report.md",
-    "mHealth_biomarker_research/_workspace2/03_biomarker_synthesis.md",
-    "mHealth_biomarker_research/_workspace2/PROCESS.md",
-    "mHealth_biomarker_research/_workspace2/paper_summary.md",
+    "_workspace5/poster_new_analysis_ko.md",
+    "_workspace5/llm_comparison_conclusions.md",
+    "_workspace5/improvement_roadmap.md",
+    "_workspace5/llm_only_evaluation_rationale.md",
+    "_workspace5/llm_only_vs_rag_comparison.md",
+    "_workspace5/overall_accuracy_chart.png",
+    "_workspace5/performance_chart.png",
+    "_workspace5/performance_report.md",
+    "_workspace5/poster_content_ko_v3.md",
+    "_workspace5/poster_content_ko_v2.md",
+    "_workspace5/poster_content_ko_clean.md",
+    "_workspace5/poster_content_v3.md",
+    "_workspace5/poster_QA.md",
+    "_workspace5/practicum_report_update.md",
+    "_workspace5/presentation_draft.md",
+    "_workspace5/presentation_draft_v5.md",
+    "_workspace5/type_accuracy_chart.png",
+    "_workspace5/small_models_report.md",
     "_workspace5/small_models_chart.png",
+    "_workspace5/presentation_new_analysis.md",
+    "_workspace5/poster_content_v2.md",
+    "_workspace5/figures/fig5_type_heatmap.png",
+    "_workspace5/figures/fig4_llm_rag_comparison.png",
+    "_workspace5/figures/fig2_model_accuracy_full.png",
+    "_workspace5/figures/fig1_rag_pipeline.png",
     "_workspace5/charts/chart5_pareto.png",
     "_workspace5/charts/chart4_llm_contribution.png",
-    "_workspace5/charts/chart3_error_breakdown.png",
-    "_workspace5/charts/chart2_vram_vs_accuracy.png",
-    "_workspace5/charts/chart1_accuracy.png",
-    "_workspace5/performance_chart.png",
-    "YoungScientist/Tutorial/outputs/06_simple_tracker.png",
-    "YoungScientist/Tutorial/outputs/05_binary_vs_soft_mask.png",
-    "YoungScientist/Tutorial/outputs/04_roi_align_demo.png"
+    "_workspace5/figures",
+    "_workspace5/generate_figures.py",
+    "_workspace5/poster_content_en_clean.md",
+    "_workspace5/presentation_draft_clean.md",
+    "_workspace5/poster_content_ko_clean.md.tmp.32032.a96e198bc5df",
+    "_workspace5/poster_new_analysis_en.md",
+    "_workspace5/presentation_draft_annotated.md",
+    "_workspace5/HANDOFF.md",
+    "_workspace5/dirty_type_analysis_report.md",
+    "_workspace5/poster_content_ko.md",
+    "_workspace5/poster_content.md",
+    "_workspace5/presentation_draft_v5.md.tmp.32032.fdd203abb126",
+    "_workspace5/analyze_llm_only_wsl.py",
+    "_workspace5/llm_only_zeroshot_deepseek-r1_1_5b.csv",
+    "_workspace5/llm_only_zeroshot_gemma3_4b.csv",
+    "_workspace5/llm_only_zeroshot_exaone3_5_7_8b.csv",
+    "_workspace5/llm_only_run.log.err",
+    "_workspace5/llm_only_run.log"
   ]
 }
