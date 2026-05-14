@@ -62,7 +62,9 @@
       "PowerShell(wsl -- /home/neohc/miniconda3/bin/python3 -c \"print\\('Python OK'\\)\" 2>&1)",
       "PowerShell(wsl -- /home/neohc/miniconda3/bin/python3 /mnt/c/Users/neohc/Desktop/ClaudeCode/_workspace5/run_llm_only_wsl.py 2>&1 | Select-Object -First 5)",
       "PowerShell(wsl -- /home/neohc/miniconda3/bin/python3 /mnt/c/Users/neohc/Desktop/ClaudeCode/_workspace5/analyze_llm_only.py 2>&1)",
-      "PowerShell(wsl -- /home/neohc/miniconda3/bin/python3 /mnt/c/Users/neohc/Desktop/ClaudeCode/_workspace5/analyze_llm_only_wsl.py 2>&1)"
+      "PowerShell(wsl -- /home/neohc/miniconda3/bin/python3 /mnt/c/Users/neohc/Desktop/ClaudeCode/_workspace5/analyze_llm_only_wsl.py 2>&1)",
+      "Bash(findstr workspace5 *)",
+      "PowerShell(Rename-Item *)"
     ]
   }
 }

@@ -4,35 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "66b20db73681d61b",
+        "id": "006ecad3b00a66e5",
         "type": "tabs",
         "children": [
           {
-            "id": "1186b7aa0e17bd44",
+            "id": "e2c7678a9390dd91",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "mHealth_biomarker_research/_workspace4/01_ux_methodology_literature.md",
+                "file": "mHealth_biomarker_research/_workspace5/04_wildenv_disease_prediction_literature.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01_ux_methodology_literature"
-            }
-          },
-          {
-            "id": "3f78a7d8a8f4f245",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "_workspace5/llm_comparison_conclusions.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "llm_comparison_conclusions"
+              "title": "04_wildenv_disease_prediction_literature"
             }
           }
         ]
@@ -92,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 293.5
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "450e8cdc6cd12880",
@@ -108,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_workspace2/01_literature_review.md",
+                "file": "mHealth_biomarker_research/_workspace5/04_wildenv_disease_prediction_literature.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +105,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "01_literature_review 의 백링크"
+              "title": "04_wildenv_disease_prediction_literature 의 백링크"
             }
           },
           {
@@ -197,44 +184,45 @@
       "bases:새 베이스 생성하기": false
     }
   },
-  "active": "1186b7aa0e17bd44",
+  "active": "e2c7678a9390dd91",
   "lastOpenFiles": [
-    "mHealth_biomarker_research/_workspace4/02_ux_synthesis.md",
-    "mHealth_biomarker_research/_workspace4/05_ux_synthesis_ko_integrated.md",
-    "mHealth_biomarker_research/_workspace4/06_voice_feature_extraction.md",
-    "mHealth_biomarker_research/_workspace4/07_GeMAPS_paper_summary.md",
-    "_workspace5/poster_content_ko_v3.md",
-    "_workspace5/poster_content_ko_v2.md",
-    "_workspace5/poster_content_ko.md",
-    "_workspace5/llm_only_vs_rag_comparison.md",
-    "_workspace5/overall_accuracy_chart.png",
+    "mHealth_biomarker_research/HANDOFF.md",
+    "mHealth_biomarker_research/_workspace5/reference_validation_04.md",
+    "mHealth_biomarker_research/_workspace5/reference_validation_04.md.tmp.16900.2f723686ae64",
+    "mHealth_biomarker_research/_workspace5/PCOS_smartphone_protocol.md",
+    "mHealth_biomarker_research/_workspace5/04_wildenv_disease_prediction_literature.md",
+    "mHealth_biomarker_research/_workspace5/PCOS_wildenv_protocol.md",
+    "11.md",
+    "mHealth_biomarker_research/_workspace5/reference_validation_01.md",
+    "mHealth_biomarker_research/_workspace5/reference_validation_02.md",
+    "12.md",
+    "1.md",
+    "CLAUDE.md",
+    "README.md",
     "_workspace5/llm_comparison_conclusions.md",
-    "_workspace5/improvement_roadmap.md",
-    "_workspace5/llm_only_evaluation_rationale.md",
-    "_workspace5/presentation_draft_v5.md",
-    "_workspace5/presentation_new_analysis.md",
-    "_workspace5/small_models_report.md",
-    "_workspace5/poster_content_v3.md",
-    "_workspace5/practicum_report_update.md",
-    "_workspace5/poster_content_v2.md",
-    "_workspace5/poster_new_analysis_en.md",
-    "_workspace5/poster_new_analysis_ko.md",
-    "_workspace5/poster_QA.md",
-    "_workspace5/oral_presentation/script_3min.md",
+    "mHealth_biomarker_research/_workspace5/01_pcos_selfcollection_literature.md",
+    "mHealth_biomarker_research/_workspace5/03_synthesis_protocol.md",
+    "mHealth_biomarker_research/_workspace5/02_user_protocol_ux_literature.md",
+    "mHealth_biomarker_research/_workspace4/02_ux_synthesis.md",
+    "mHealth_biomarker_research/_workspace4/04_korean_voice_literature.md",
+    "mHealth_biomarker_research/_workspace4/01_ux_methodology_literature.md",
+    "mHealth_biomarker_research/CONTEXT.md",
+    "mHealth_biomarker_research/detailed_study_analysis.md",
+    "mHealth_biomarker_research/data_collection_analysis_summary.md",
+    "mHealth_biomarker_research/_workspace5/01_pcos_selfcollection_literature.md.tmp.16900.a2d346092924",
+    "mHealth_biomarker_research/_workspace4/reference_validation_ux.md",
+    "mHealth_biomarker_research/_workspace4/06_voice_feature_extraction.md",
+    "mHealth_biomarker_research/_workspace4/05_ux_synthesis_ko_integrated.md",
+    "mHealth_biomarker_research/_workspace5",
+    "mHealth_biomarker_research/_workspace4/07_GeMAPS_paper_summary.md",
+    "_workspace5/overall_accuracy_chart.png",
     "_workspace5/msoBB52.tmp",
     "_workspace5/~$[Form2] Oral Presentation_form_AI.pptx",
     "_workspace5/[Form2] Oral Presentation_form_AI.pptx",
     "_workspace5/~$[Form1] poster_template_AI.pptx",
-    "_workspace5/oral_presentation/script_3min_EN.md",
-    "_workspace5/oral_presentation/03_slide_deck.md",
     "_workspace5/oral_presentation/~$oral_presentation_EN.pptx",
     "_workspace5/oral_presentation/~$oral_presentation_KO.pptx",
     "_workspace5/oral_presentation/oral_presentation_KO.pptx",
-    "_workspace5/oral_presentation/oral_presentation_EN.pptx",
-    "_workspace5/oral_presentation/generate_pptx.py",
-    "_workspace5/oral_presentation/01_story_structure.md",
-    "_workspace5/oral_presentation/00_input.md",
-    "mHealth_biomarker_research/detailed_study_analysis.md",
     "_workspace5/performance_chart.png",
     "_workspace5/type_accuracy_chart.png",
     "_workspace5/small_models_chart.png",
@@ -243,7 +231,6 @@
     "_workspace5/figures/fig2_model_accuracy_full.png",
     "_workspace5/figures/fig1_rag_pipeline.png",
     "_workspace5/charts/chart5_pareto.png",
-    "_workspace5/charts/chart4_llm_contribution.png",
-    "_workspace5/figures"
+    "_workspace5/charts/chart4_llm_contribution.png"
   ]
 }
