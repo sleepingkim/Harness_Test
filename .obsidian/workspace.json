@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Scholarship/학업계획서_v2.md",
+                "file": "mHealth_biomarker_research/현장연구보고서(직접 수정 및 작성).md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "학업계획서_v2"
+              "title": "현장연구보고서(직접 수정 및 작성)"
             }
           }
         ]
@@ -185,8 +185,17 @@
   },
   "active": "e2c7678a9390dd91",
   "lastOpenFiles": [
-    "Scholarship/학업계획서.md",
+    "mHealth_biomarker_research/latex/README.md",
+    "mHealth_biomarker_research/latex/README.md.tmp.11544.633fc4e42fef",
+    "mHealth_biomarker_research/latex/main.tex",
+    "mHealth_biomarker_research/latex",
+    "mHealth_biomarker_research/현장연구보고서_PCOS_디지털바이오마커.md",
+    "mHealth_biomarker_research/CONTEXT.md",
+    "mHealth_biomarker_research/현장연구보고서(직접 수정 및 작성).md",
+    "_workspace5/presentation_draft_v5.md",
+    "_workspace5/small_models_report.md",
     "Scholarship/학업계획서_v2.md",
+    "Scholarship/학업계획서.md",
     "Scholarship/학업계획서_참고.md",
     "README.md",
     "CLAUDE.md",
@@ -199,9 +208,6 @@
     "Skill_list/Skill1_K-Dense/scientific-agent-skills-main/scientific-skills/xlsx/scripts/office/schemas/ecma/fouth-edition/opc-coreProperties.xsd",
     "Skill_list/Skill1_K-Dense/scientific-agent-skills-main/scientific-skills/xlsx/scripts/office/schemas/ecma/fouth-edition/opc-contentTypes.xsd",
     "Skill_list/Skill1_K-Dense/scientific-agent-skills-main/scientific-skills/pptx/scripts/office/schemas/ecma/fouth-edition/opc-relationships.xsd",
-    "Skill_list/Skill1_K-Dense/scientific-agent-skills-main/scientific-skills/pptx/scripts/office/schemas/ecma/fouth-edition/opc-digSig.xsd",
-    "Skill_list/Skill1_K-Dense/scientific-agent-skills-main/scientific-skills/pptx/scripts/office/schemas/ecma/fouth-edition/opc-coreProperties.xsd",
-    "Skill_list/Skill1_K-Dense/scientific-agent-skills-main/scientific-skills/pptx/scripts/office/schemas/ecma/fouth-edition/opc-contentTypes.xsd",
     "Skill_list/Skill1_K-Dense/scientific-agent-skills-main/scientific-skills/timesfm-forecasting/examples/covariates-forecasting/output/covariates_data.png",
     "Skill_list/Skill1_K-Dense/scientific-agent-skills-main/scientific-skills/timesfm-forecasting/examples/global-temperature/output/forecast_visualization.png",
     "Skill_list/Skill1_K-Dense/scientific-agent-skills-main/scientific-skills/timesfm-forecasting/examples/global-temperature/output/forecast_animation.gif",
@@ -219,12 +225,6 @@
     "Skill_list/Skill5_oh-my-claudecode/oh-my-claudecode-main/benchmarks/code-reviewer/fixtures/code/code-retry-handler.md",
     "Skill_list/Skill5_oh-my-claudecode/oh-my-claudecode-main/benchmarks/executor/fixtures/tasks/task-add-timestamp.md",
     "Skill_list/Skill5_oh-my-claudecode/oh-my-claudecode-main/benchmarks/code-reviewer/fixtures/code/code-sql-injection.md",
-    "Skill_list/Skill5_oh-my-claudecode/oh-my-claudecode-main/benchmarks/code-reviewer/fixtures/code/code-payment-refund.md",
-    "Skill_list/Skill5_oh-my-claudecode/oh-my-claudecode-main/benchmarks/debugger/fixtures/bugs/bug-undefined-map.md",
-    "Skill_list/Skill5_oh-my-claudecode/oh-my-claudecode-main/benchmarks/debugger/fixtures/bugs/bug-ts-build-errors.md",
-    "Skill_list/Skill5_oh-my-claudecode/oh-my-claudecode-main/benchmarks/debugger/fixtures/bugs/bug-redis-intermittent.md",
-    "Skill_list/Skill1_K-Dense/scientific-agent-skills-main/scientific-skills/venue-templates/assets/examples/neurips_introduction_example.md",
-    "Skill_list/Skill1_K-Dense/scientific-agent-skills-main/scientific-skills/venue-templates/assets/examples/nature_abstract_examples.md",
     "Skill_list/SKill6_hwpx/hwpx-main/templates/base/Preview/PrvImage.png",
     "Skill_list/Skill5_oh-my-claudecode/oh-my-claudecode-main/docs/issues/windows-hud-missing.png",
     "Skill_list/Skill5_oh-my-claudecode/oh-my-claudecode-main/assets/omc-character.jpg",
